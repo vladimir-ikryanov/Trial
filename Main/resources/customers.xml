@@ -1,0 +1,16 @@
+<customers>
+    <customer>
+        <firstName>John</firstName>
+        <lastName>Doe</lastName>
+        <email>john.doe@gmail.com</email>
+        <pipeline>0</pipeline>
+        <startDate>20-06-2015</startDate>
+    </customer>
+    <customer>
+        <firstName>John</firstName>
+        <lastName>Doe</lastName>
+        <email>john.doe@gmail.com</email>
+        <pipeline>0</pipeline>
+        <startDate>20-10-2015</startDate>
+    </customer>
+</customers>

@@ -1,0 +1,39 @@
+<pipeline id="0" name="30-days evaluation">
+    <phase name="Start" offsetInDays="0">
+
+    </phase>
+    <phase name="Day" offsetInDays="1">
+        <action type="email">
+            <subject>Day Subject</subject>
+            <body>Hello {firstName}</body>
+        </action>
+    </phase>
+    <phase name="Week" offsetInDays="7">
+        <action type="email">
+            <subject>Week Subject</subject>
+            <body>Hello {firstName}</body>
+        </action>
+    </phase>
+    <phase name="Offer" offsetInDays="20">
+        <action type="email">
+            <subject>Offer Subject</subject>
+            <body>Hello {firstName}</body>
+        </action>
+    </phase>
+    <phase name="Pre-finish" offsetInDays="29">
+        <action type="email">
+            <subject>Pre-finish Subject</subject>
+            <body>Hello {firstName}</body>
+        </action>
+    </phase>
+    <phase name="Feedback" offsetInDays="30">
+        <action type="email">
+            <subject>Feedback Subject</subject>
+            <body>Hello {firstName}</body>
+        </action>
+    </phase>
+    <phase name="Finish" offsetInDays="37">
+        <action type="decision">
+        </action>
+    </phase>
+</pipeline>
