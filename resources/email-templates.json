@@ -1,0 +1,29 @@
+{
+  "templates": [
+    {
+      "id": 0,
+      "subject": "Day Subject",
+      "body": "Hello {firstName}"
+    },
+    {
+      "id": 1,
+      "subject": "Week Subject",
+      "body": "Hello {firstName}"
+    },
+    {
+      "id": 2,
+      "subject": "Offer Subject",
+      "body": "Hello {firstName}"
+    },
+    {
+      "id": 3,
+      "subject": "Pre-finish Subject",
+      "body": "Hello {firstName}"
+    },
+    {
+      "id": 4,
+      "subject": "Feedback Subject",
+      "body": "Hello {firstName}"
+    }
+  ]
+}

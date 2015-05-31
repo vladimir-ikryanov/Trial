@@ -1,7 +1,14 @@
 package com.teamdev.trial;
 
+import com.teamdev.trial.data.Customer;
+import com.teamdev.trial.data.PipelineFactory;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
 
 import static java.awt.GridBagConstraints.*;
 
@@ -9,8 +16,11 @@ import static java.awt.GridBagConstraints.*;
  * @author Vladimir Ikryanov
  */
 public class ApplicationFrame extends JFrame {
-    public ApplicationFrame() throws HeadlessException {
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+    private final ApplicationContext context;
+
+    public ApplicationFrame(ApplicationContext context) throws HeadlessException {
+        this.context = context;
         setContentPane(createSplitPane());
     }
 
@@ -68,17 +78,18 @@ public class ApplicationFrame extends JFrame {
     private Component createLeftContent() {
         JPanel result = new JPanel(new BorderLayout());
         result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        result.add(createPipelinesPane(), BorderLayout.CENTER);
+        result.add(createCustomersPane(), BorderLayout.CENTER);
         return result;
     }
 
-    private Component createPipelinesPane() {
+    private Component createCustomersPane() {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new GridBagLayout());
-        for (int i = 0; i < 10; i++) {
-            contentPane.add(new PipelinePane(), new GridBagConstraints(0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+        List<Customer> customers = context.getCustomers().getCustomers();
+        for (int i = 0; i < customers.size(); i++) {
+            contentPane.add(new CustomerPane(customers.get(i)), new GridBagConstraints(0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
         }
-        contentPane.add(Box.createVerticalGlue(), new GridBagConstraints(0, 10, 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
+        contentPane.add(Box.createVerticalGlue(), new GridBagConstraints(0, customers.size(), 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
         JScrollPane result = new JScrollPane(contentPane);
         result.setBorder(BorderFactory.createEmptyBorder());
@@ -92,7 +103,15 @@ public class ApplicationFrame extends JFrame {
         JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         result.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
         result.add(label);
-        result.add(new JButton("New Customer"));
+        JButton button = new JButton("New Customer");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Customer customer = new Customer("Manish", "Bla", "b@gmail.com", PipelineFactory.create30DaysEvaluation(new Date()), Customer.State.UNKNOWN);
+                context.getCustomers().addCustomer(customer);
+            }
+        });
+        result.add(button);
         return result;
     }
 }
