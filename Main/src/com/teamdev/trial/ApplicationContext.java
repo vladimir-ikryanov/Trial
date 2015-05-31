@@ -1,42 +1,40 @@
 package com.teamdev.trial;
 
-import com.teamdev.trial.data.Customers;
-import com.teamdev.trial.data.EmailTemplates;
+import com.google.gson.reflect.TypeToken;
+import com.teamdev.trial.data.Customer;
+import com.teamdev.trial.data.CustomersManager;
+import com.teamdev.trial.data.JSONDataStorage;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Vladimir Ikryanov
  */
 public class ApplicationContext {
 
-    private Customers customers;
-    private EmailTemplates emailTemplates;
-    private ApplicationSettings settings;
+    private final CustomersManager customersManager;
+    private final JSONDataStorage<List<Customer>> customersDataStorage;
 
     public ApplicationContext(ApplicationSettings settings) {
-        this.settings = settings;
+        this.customersManager = new CustomersManager();
+        this.customersDataStorage = new JSONDataStorage<List<Customer>>(settings.getCustomersFile(),
+                new TypeToken<List<Customer>>() {});
     }
 
-    public Customers getCustomers() {
-        return customers;
+    public CustomersManager getCustomersManager() {
+        return customersManager;
     }
 
-    public EmailTemplates getEmailTemplates() {
-        return emailTemplates;
+    public void load() throws Exception {
+        List<Customer> customers = customersDataStorage.load();
+        if (customers != null) {
+            for (Customer customer : customers) {
+                customersManager.addCustomer(customer);
+            }
+        }
     }
 
-    public void load() throws FileNotFoundException {
-        customers = Customers.load(new FileReader(settings.getCustomersFile()));
-        emailTemplates = EmailTemplates.load(new FileReader(settings.getEmailTemplatesFile()));
-    }
-
-    public void save() throws IOException {
-        FileWriter writer = new FileWriter(settings.getCustomersFile());
-        Customers.save(customers, writer);
-        writer.close();
+    public void save() throws Exception {
+        customersDataStorage.save(customersManager.getCustomers());
     }
 }

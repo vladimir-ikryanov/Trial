@@ -1,5 +1,7 @@
 package com.teamdev.trial.data;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,8 +10,11 @@ import java.util.List;
  */
 public class Pipeline {
 
+    @Expose
     private String name;
+    @Expose
     private Date startDate;
+    @Expose
     private List<Phase> phases;
 
     private Pipeline() {

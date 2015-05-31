@@ -1,5 +1,7 @@
 package com.teamdev.trial.data;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * @author Vladimir Ikryanov
  */
@@ -9,9 +11,13 @@ public class Phase {
         OPENED, CLOSED, CANCELED
     }
 
+    @Expose
     private String name;
+    @Expose
     private int offsetInDays;
+    @Expose
     private int emailId;
+    @Expose
     private State state;
 
     private Phase() {

@@ -1,0 +1,164 @@
+[
+  {
+    "firstName": "a",
+    "lastName": "a",
+    "email": "a",
+    "pipeline": {
+      "name": "30-Days Evaluation",
+      "startDate": "Jun 1, 2015 12:49:43 AM",
+      "phases": [
+        {
+          "name": "Start",
+          "offsetInDays": 0,
+          "emailId": -1,
+          "state": "OPENED"
+        },
+        {
+          "name": "Day",
+          "offsetInDays": 1,
+          "emailId": 0,
+          "state": "OPENED"
+        },
+        {
+          "name": "Week",
+          "offsetInDays": 7,
+          "emailId": 1,
+          "state": "OPENED"
+        },
+        {
+          "name": "Offer",
+          "offsetInDays": 20,
+          "emailId": 2,
+          "state": "OPENED"
+        },
+        {
+          "name": "Pre-Finish",
+          "offsetInDays": 29,
+          "emailId": 3,
+          "state": "OPENED"
+        },
+        {
+          "name": "Feedback",
+          "offsetInDays": 30,
+          "emailId": 4,
+          "state": "OPENED"
+        },
+        {
+          "name": "Finish",
+          "offsetInDays": 30,
+          "emailId": -1,
+          "state": "OPENED"
+        }
+      ]
+    },
+    "state": "UNKNOWN"
+  },
+  {
+    "firstName": "b",
+    "lastName": "b",
+    "email": "b",
+    "pipeline": {
+      "name": "30-Days Evaluation",
+      "startDate": "Jun 1, 2015 12:49:57 AM",
+      "phases": [
+        {
+          "name": "Start",
+          "offsetInDays": 0,
+          "emailId": -1,
+          "state": "OPENED"
+        },
+        {
+          "name": "Day",
+          "offsetInDays": 1,
+          "emailId": 0,
+          "state": "OPENED"
+        },
+        {
+          "name": "Week",
+          "offsetInDays": 7,
+          "emailId": 1,
+          "state": "OPENED"
+        },
+        {
+          "name": "Offer",
+          "offsetInDays": 20,
+          "emailId": 2,
+          "state": "OPENED"
+        },
+        {
+          "name": "Pre-Finish",
+          "offsetInDays": 29,
+          "emailId": 3,
+          "state": "OPENED"
+        },
+        {
+          "name": "Feedback",
+          "offsetInDays": 30,
+          "emailId": 4,
+          "state": "OPENED"
+        },
+        {
+          "name": "Finish",
+          "offsetInDays": 30,
+          "emailId": -1,
+          "state": "OPENED"
+        }
+      ]
+    },
+    "state": "UNKNOWN"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@gmail.com",
+    "pipeline": {
+      "name": "30-Days Evaluation",
+      "startDate": "May 31, 2015 12:54:08 AM",
+      "phases": [
+        {
+          "name": "Start",
+          "offsetInDays": 0,
+          "emailId": -1,
+          "state": "OPENED"
+        },
+        {
+          "name": "Day",
+          "offsetInDays": 1,
+          "emailId": 0,
+          "state": "OPENED"
+        },
+        {
+          "name": "Week",
+          "offsetInDays": 7,
+          "emailId": 1,
+          "state": "OPENED"
+        },
+        {
+          "name": "Offer",
+          "offsetInDays": 20,
+          "emailId": 2,
+          "state": "OPENED"
+        },
+        {
+          "name": "Pre-Finish",
+          "offsetInDays": 29,
+          "emailId": 3,
+          "state": "OPENED"
+        },
+        {
+          "name": "Feedback",
+          "offsetInDays": 30,
+          "emailId": 4,
+          "state": "OPENED"
+        },
+        {
+          "name": "Finish",
+          "offsetInDays": 30,
+          "emailId": -1,
+          "state": "OPENED"
+        }
+      ]
+    },
+    "state": "UNKNOWN"
+  }
+]

@@ -1,5 +1,10 @@
 package com.teamdev.trial.data;
 
+import com.google.gson.annotations.Expose;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Vladimir Ikryanov
  */
@@ -9,21 +14,42 @@ public class Customer {
         WIN, LOSS, UNKNOWN
     }
 
+    @Expose
     private String firstName;
+    @Expose
     private String lastName;
+    @Expose
     private String email;
+    @Expose
     private Pipeline pipeline;
+    @Expose
     private State state;
 
-    private Customer() {
+    private final List<CustomerListener> listeners;
+
+    public Customer() {
+        listeners = new ArrayList<CustomerListener>();
     }
 
-    public Customer(String firstName, String lastName, String email, Pipeline pipeline, State state) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.pipeline = pipeline;
-        this.state = state;
+    public void addCustomersListener(CustomerListener listener) {
+        if (!listeners.contains(listener)) {
+            listeners.add(listener);
+        }
+    }
+
+    public void removeCustomerListener(CustomerListener listener) {
+        listeners.remove(listener);
+    }
+
+    public List<CustomerListener> getCustomerListeners() {
+        return new ArrayList<CustomerListener>(listeners);
+    }
+
+    private void fireOnCustomerChanged() {
+        CustomerEvent event = new CustomerEvent(this);
+        for (CustomerListener listener : getCustomerListeners()) {
+            listener.onCustomerChanged(event);
+        }
     }
 
     public String getFirstName() {
@@ -32,6 +58,7 @@ public class Customer {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        fireOnCustomerChanged();
     }
 
     public String getLastName() {
@@ -40,6 +67,7 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        fireOnCustomerChanged();
     }
 
     public String getEmail() {
@@ -48,6 +76,7 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+        fireOnCustomerChanged();
     }
 
     public Pipeline getPipeline() {
@@ -56,6 +85,7 @@ public class Customer {
 
     public void setPipeline(Pipeline pipeline) {
         this.pipeline = pipeline;
+        fireOnCustomerChanged();
     }
 
     public State getState() {
@@ -64,5 +94,6 @@ public class Customer {
 
     public void setState(State state) {
         this.state = state;
+        fireOnCustomerChanged();
     }
 }

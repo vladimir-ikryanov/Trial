@@ -1,12 +1,13 @@
 package com.teamdev.trial;
 
-import com.teamdev.trial.data.Customer;
-import com.teamdev.trial.data.PipelineFactory;
+import com.teamdev.trial.data.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +20,19 @@ public class ApplicationFrame extends JFrame {
 
     private final ApplicationContext context;
 
-    public ApplicationFrame(ApplicationContext context) throws HeadlessException {
+    public ApplicationFrame(final ApplicationContext context) throws HeadlessException {
         this.context = context;
         setContentPane(createSplitPane());
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                try {
+                    context.save();
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to save app context.", e);
+                }
+            }
+        });
     }
 
     private JSplitPane createSplitPane() {
@@ -83,17 +94,7 @@ public class ApplicationFrame extends JFrame {
     }
 
     private Component createCustomersPane() {
-        JPanel contentPane = new JPanel();
-        contentPane.setLayout(new GridBagLayout());
-        List<Customer> customers = context.getCustomers().getCustomers();
-        for (int i = 0; i < customers.size(); i++) {
-            contentPane.add(new CustomerPane(customers.get(i)), new GridBagConstraints(0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-        }
-        contentPane.add(Box.createVerticalGlue(), new GridBagConstraints(0, customers.size(), 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
-
-        JScrollPane result = new JScrollPane(contentPane);
-        result.setBorder(BorderFactory.createEmptyBorder());
-        return result;
+        return new CustomersPane(context);
     }
 
     private Component createLeftCaption() {
@@ -107,8 +108,16 @@ public class ApplicationFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Customer customer = new Customer("Manish", "Bla", "b@gmail.com", PipelineFactory.create30DaysEvaluation(new Date()), Customer.State.UNKNOWN);
-                context.getCustomers().addCustomer(customer);
+                NewCustomerDialog dialog = new NewCustomerDialog(ApplicationFrame.this, context);
+                dialog.pack();
+                dialog.setResizable(false);
+                dialog.setLocationRelativeTo(ApplicationFrame.this);
+                dialog.setVisible(true);
+
+                Customer customer = dialog.getCustomer();
+                if (customer != null) {
+                    context.getCustomersManager().addCustomer(customer);
+                }
             }
         });
         result.add(button);

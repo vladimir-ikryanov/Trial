@@ -24,6 +24,7 @@ public class CustomerPane extends JPanel {
 
     private Component createCustomerPane(Customer customer) {
         JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
         result.add(new JLabel(customer.getFirstName() + " " + customer.getLastName()), BorderLayout.CENTER);
         result.add(new JLabel(customer.getEmail()), BorderLayout.SOUTH);
         return result;
@@ -31,6 +32,7 @@ public class CustomerPane extends JPanel {
 
     private Component createPipelinePane(Customer customer) {
         JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        result.setOpaque(false);
         Pipeline pipeline = customer.getPipeline();
         List<Phase> phases = pipeline.getPhases();
         for (Phase phase : phases) {
