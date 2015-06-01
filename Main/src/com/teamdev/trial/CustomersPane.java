@@ -52,7 +52,7 @@ public class CustomersPane extends JPanel {
         for (int i = 0; i < customers.size(); i++) {
             Customer customer = customers.get(i);
             if (customer.getState() == Customer.State.UNKNOWN) {
-                customersPane.add(new CustomerPane(customer), new GridBagConstraints(
+                customersPane.add(new CustomerPane(context, customer), new GridBagConstraints(
                         0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
             }
         }

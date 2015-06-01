@@ -92,7 +92,7 @@ public class CustomerDialog extends JDialog {
                 String lastName = lastNameTextField.getText();
                 String email = emailTextField.getText();
                 Date date = registrationDateChooser.getDate();
-                if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty()) {
+                if (!firstName.isEmpty() && !email.isEmpty()) {
                     customer = new Customer();
                     customer.setFirstName(firstName);
                     customer.setLastName(lastName);

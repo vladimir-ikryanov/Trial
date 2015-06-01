@@ -8,7 +8,7 @@ import com.teamdev.trial.data.Phase;
  */
 public class FinishReminder extends Reminder {
 
-    public FinishReminder(Customer customer, Phase phase) {
-        super(customer, phase);
+    public FinishReminder(Customer customer, Phase phase, long expirationInDays) {
+        super(customer, phase, expirationInDays);
     }
 }

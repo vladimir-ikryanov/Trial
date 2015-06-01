@@ -17,7 +17,7 @@ public class Application {
 
         ApplicationFrame frame = new ApplicationFrame(context);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setSize(900, 600);
+        frame.setSize(1200, 600);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

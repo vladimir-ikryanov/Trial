@@ -38,12 +38,12 @@ public class RemindersBuilder {
                             EmailTemplate emailTemplate = emailTemplates.getEmailTemplateById(phase.getEmailId());
                             boolean hasEmailTemplate = emailTemplate != null;
                             if (hasEmailTemplate) {
-                                result.add(new EmailReminder(customer, phase, emailTemplate));
+                                result.add(new EmailReminder(customer, phase, dateDiffInDays, emailTemplate));
                             }
 
                             boolean isFinishPhase = i == phases.size() - 1;
                             if (isFinishPhase) {
-                                result.add(new FinishReminder(customer, phase));
+                                result.add(new FinishReminder(customer, phase, dateDiffInDays));
                             }
                         }
                     }

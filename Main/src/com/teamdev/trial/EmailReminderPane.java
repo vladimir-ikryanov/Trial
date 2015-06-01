@@ -68,7 +68,12 @@ public class EmailReminderPane extends JPanel {
         Customer customer = reminder.getCustomer();
         JPanel result = new JPanel(new BorderLayout());
         result.add(new JLabel(customer.getFirstName() + ' ' + customer.getLastName()), BorderLayout.CENTER);
-        result.add(new JLabel("Send " + reminder.getPhase().getName() + " email"), BorderLayout.SOUTH);
+        JLabel label = new JLabel("Send " + reminder.getPhase().getName() + " email");
+        if (reminder.getExpirationInDays() > 0) {
+            label.setForeground(Color.RED);
+            label.setToolTipText("Should have been done " + reminder.getExpirationInDays() + " days ago.");
+        }
+        result.add(label, BorderLayout.SOUTH);
         return result;
     }
 }

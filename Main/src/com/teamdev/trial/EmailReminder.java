@@ -11,8 +11,8 @@ public class EmailReminder extends Reminder {
 
     private final EmailTemplate emailTemplate;
 
-    public EmailReminder(Customer customer, Phase phase, EmailTemplate emailTemplate) {
-        super(customer, phase);
+    public EmailReminder(Customer customer, Phase phase, long expirationInDays, EmailTemplate emailTemplate) {
+        super(customer, phase, expirationInDays);
         this.emailTemplate = emailTemplate;
     }
 

@@ -10,10 +10,12 @@ public class Reminder {
 
     private final Customer customer;
     private final Phase phase;
+    private final long expirationInDays;
 
-    protected Reminder(Customer customer, Phase phase) {
+    protected Reminder(Customer customer, Phase phase, long expirationInDays) {
         this.customer = customer;
         this.phase = phase;
+        this.expirationInDays = expirationInDays;
     }
 
     public Customer getCustomer() {
@@ -22,5 +24,9 @@ public class Reminder {
 
     public Phase getPhase() {
         return phase;
+    }
+
+    public long getExpirationInDays() {
+        return expirationInDays;
     }
 }
