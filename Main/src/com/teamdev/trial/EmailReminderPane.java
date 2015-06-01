@@ -4,7 +4,6 @@ import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.Phase;
 import com.teamdev.trial.data.PhaseState;
 
-import javax.mail.MessagingException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -32,12 +31,12 @@ public class EmailReminderPane extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Window parent = SwingUtilities.getWindowAncestor(EmailReminderPane.this);
-                EmailPreviewDialog dialog = new EmailPreviewDialog(parent, reminder.getCustomer(), reminder.getEmailTemplate());
+                PreviewDialog dialog = new PreviewDialog(parent, reminder.getCustomer(), reminder.getEmailTemplate());
                 dialog.setSize(800, 600);
                 dialog.setLocationRelativeTo(parent);
                 dialog.setVisible(true);
 
-                if (dialog.getStatus() == EmailPreviewDialog.Status.SENT) {
+                if (dialog.getStatus() == PreviewDialog.Status.SENT) {
                     String to = reminder.getCustomer().getEmail();
                     String subject = dialog.getSubject();
                     String body = dialog.getBody();
