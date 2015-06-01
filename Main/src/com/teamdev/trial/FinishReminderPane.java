@@ -1,7 +1,7 @@
 package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
-import com.teamdev.trial.data.Phase;
+import com.teamdev.trial.data.PhaseState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +29,7 @@ public class FinishReminderPane extends JPanel {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reminder.getPhase().setState(Phase.State.CLOSED);
+                reminder.getPhaseState().setState(PhaseState.State.CLOSED);
                 reminder.getCustomer().setState(Customer.State.WIN);
             }
         });
@@ -39,7 +39,7 @@ public class FinishReminderPane extends JPanel {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reminder.getPhase().setState(Phase.State.CANCELED);
+                reminder.getPhaseState().setState(PhaseState.State.CANCELED);
                 reminder.getCustomer().setState(Customer.State.LOSS);
             }
         });

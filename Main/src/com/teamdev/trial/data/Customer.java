@@ -16,12 +16,16 @@ public class Customer {
 
     @Expose
     private String firstName;
+
     @Expose
     private String lastName;
+
     @Expose
     private String email;
+
     @Expose
-    private Pipeline pipeline;
+    private PipelineState pipelineState;
+
     @Expose
     private State state;
 
@@ -79,12 +83,12 @@ public class Customer {
         fireOnCustomerChanged();
     }
 
-    public Pipeline getPipeline() {
-        return pipeline;
+    public PipelineState getPipelineState() {
+        return pipelineState;
     }
 
-    public void setPipeline(Pipeline pipeline) {
-        this.pipeline = pipeline;
+    public void setPipelineState(PipelineState pipelineState) {
+        this.pipelineState = pipelineState;
         fireOnCustomerChanged();
     }
 

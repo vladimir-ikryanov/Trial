@@ -5,10 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author Vladimir Ikryanov
@@ -31,6 +27,8 @@ public class JSONDataStorage<D> {
             D result = gson.fromJson(reader, type.getType());
             reader.close();
             return result;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

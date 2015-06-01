@@ -112,20 +112,12 @@ public class ApplicationFrame extends JFrame {
 
         @Override
         public void windowClosing(WindowEvent e) {
-            try {
-                context.save();
-            } catch (Exception exception) {
-                throw new RuntimeException("Failed to save app context.", exception);
-            }
+            context.save();
         }
 
         @Override
         public void windowDeactivated(WindowEvent e) {
-            try {
-                context.save();
-            } catch (Exception exception) {
-                throw new RuntimeException("Failed to save app context.", exception);
-            }
+            context.save();
         }
     }
 }

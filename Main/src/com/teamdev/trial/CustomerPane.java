@@ -2,7 +2,8 @@ package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.Phase;
-import com.teamdev.trial.data.Pipeline;
+import com.teamdev.trial.data.PhaseState;
+import com.teamdev.trial.data.PipelineState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -85,10 +86,11 @@ public class CustomerPane extends JPanel {
     private Component createPipelinePane() {
         JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT));
         result.setOpaque(false);
-        Pipeline pipeline = customer.getPipeline();
-        List<Phase> phases = pipeline.getPhases();
-        for (Phase phase : phases) {
-            JLabel label = new JLabel(phase.getName() + ": " + phase.getState());
+        PipelineState pipelineState = customer.getPipelineState();
+        List<PhaseState> phaseStates = pipelineState.getPhaseStates();
+        for (PhaseState phaseState : phaseStates) {
+            Phase phase = context.getPhasesManager().getPhaseById(phaseState.getPhaseId());
+            JLabel label = new JLabel(phase.getName() + ": " + phaseState.getState());
             result.add(label);
         }
         return result;

@@ -7,12 +7,20 @@ import java.io.File;
  */
 public class ApplicationSettings {
 
-    public File getEmailTemplatesFile() {
+    public File getEmailsFile() {
         return new File("data/templates.json");
     }
 
     public File getCustomersFile() {
         return new File("data/customers.json");
+    }
+
+    public File getPhasesFile() {
+        return new File("data/phases.json");
+    }
+
+    public File getPipelinesFile() {
+        return new File("data/pipelines.json");
     }
 
     public String getFrom() {

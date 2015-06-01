@@ -24,26 +24,31 @@ public class RemindersBuilder {
         List<Customer> customers = customersManager.getCustomers();
         for (Customer customer : customers) {
             if (customer.getState() == Customer.State.UNKNOWN) {
-                Pipeline pipeline = customer.getPipeline();
-                Date startDate = pipeline.getStartDate();
+                PipelineState pipelineState = customer.getPipelineState();
+                Date startDate = pipelineState.getStartDate();
                 Date today = new Date();
-                List<Phase> phases = pipeline.getPhases();
-                for (int i = 0; i < phases.size(); i++) {
-                    Phase phase = phases.get(i);
-                    if (phase.getState() == Phase.State.OPENED) {
+                List<PhaseState> phaseStates = pipelineState.getPhaseStates();
+                for (int i = 0; i < phaseStates.size(); i++) {
+                    PhaseState phaseState = phaseStates.get(i);
+                    if (phaseState.getState() == PhaseState.State.OPENED) {
                         long dateDiffInDays = getDateDiff(startDate, today, TimeUnit.DAYS);
-                        boolean reachedOffsetInDays = dateDiffInDays >= phase.getOffsetInDays();
+                        Phase phase = context.getPhasesManager().getPhaseById(phaseState.getPhaseId());
+                        int offsetInDays = phaseState.getCustomOffsetInDays();
+                        if (offsetInDays == 0) {
+                            offsetInDays = phase.getOffsetInDays();
+                        }
+                        boolean reachedOffsetInDays = dateDiffInDays >= offsetInDays;
                         if (reachedOffsetInDays) {
-                            EmailTemplates emailTemplates = context.getEmailTemplates();
-                            EmailTemplate emailTemplate = emailTemplates.getEmailTemplateById(phase.getEmailId());
+                            EmailTemplatesManager emailTemplatesManager = context.getEmailTemplatesManager();
+                            EmailTemplate emailTemplate = emailTemplatesManager.getEmailTemplateById(phase.getEmailTemplateId());
                             boolean hasEmailTemplate = emailTemplate != null;
                             if (hasEmailTemplate) {
-                                result.add(new EmailReminder(customer, phase, dateDiffInDays, emailTemplate));
+                                result.add(new EmailReminder(customer, phaseState, dateDiffInDays, emailTemplate));
                             }
 
-                            boolean isFinishPhase = i == phases.size() - 1;
+                            boolean isFinishPhase = i == phaseStates.size() - 1;
                             if (isFinishPhase) {
-                                result.add(new FinishReminder(customer, phase, dateDiffInDays));
+                                result.add(new FinishReminder(customer, phaseState, dateDiffInDays));
                             }
                         }
                     }

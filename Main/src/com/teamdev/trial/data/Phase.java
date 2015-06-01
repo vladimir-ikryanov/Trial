@@ -7,27 +7,23 @@ import com.google.gson.annotations.Expose;
  */
 public class Phase {
 
-    public enum State {
-        OPENED, CLOSED, CANCELED
-    }
+    @Expose
+    private int id;
 
     @Expose
     private String name;
+
     @Expose
     private int offsetInDays;
+
     @Expose
-    private int emailId;
-    @Expose
-    private State state;
+    private int emailTemplateId;
 
     private Phase() {
     }
 
-    public Phase(String name, int offsetInDays, int emailId, State state) {
-        this.name = name;
-        this.offsetInDays = offsetInDays;
-        this.emailId = emailId;
-        this.state = state;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -38,15 +34,7 @@ public class Phase {
         return offsetInDays;
     }
 
-    public int getEmailId() {
-        return emailId;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
+    public int getEmailTemplateId() {
+        return emailTemplateId;
     }
 }

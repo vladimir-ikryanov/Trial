@@ -3,7 +3,6 @@ package com.teamdev.trial.data;
 import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,30 +11,31 @@ import java.util.List;
 public class Pipeline {
 
     @Expose
+    private int id;
+
+    @Expose
     private String name;
+
     @Expose
-    private Date startDate;
-    @Expose
-    private List<Phase> phases;
+    private List<Integer> phasesIds;
 
     private Pipeline() {
     }
 
-    public Pipeline(String name, List<Phase> phases, Date startDate) {
-        this.name = name;
-        this.phases = phases;
-        this.startDate = new Date(startDate.getTime());
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public Date getStartDate() {
-        return new Date(startDate.getTime());
+    public List<Integer> getPhasesIds() {
+        return new ArrayList<Integer>(phasesIds);
     }
 
-    public List<Phase> getPhases() {
-        return new ArrayList<Phase>(phases);
+    @Override
+    public String toString() {
+        return name;
     }
 }

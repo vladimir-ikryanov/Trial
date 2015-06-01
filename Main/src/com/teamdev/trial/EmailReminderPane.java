@@ -2,6 +2,7 @@ package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.Phase;
+import com.teamdev.trial.data.PhaseState;
 
 import javax.mail.MessagingException;
 import javax.swing.*;
@@ -48,7 +49,7 @@ public class EmailReminderPane extends JPanel {
                     } catch (MessagingException exception) {
                         throw new RuntimeException(exception);
                     }
-                    reminder.getPhase().setState(Phase.State.CLOSED);
+                    reminder.getPhaseState().setState(PhaseState.State.CLOSED);
                     reminder.getCustomer().setState(Customer.State.UNKNOWN);
                 }
             }
@@ -59,7 +60,7 @@ public class EmailReminderPane extends JPanel {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reminder.getPhase().setState(Phase.State.CANCELED);
+                reminder.getPhaseState().setState(PhaseState.State.CANCELED);
                 reminder.getCustomer().setState(Customer.State.UNKNOWN);
             }
         });
@@ -71,7 +72,9 @@ public class EmailReminderPane extends JPanel {
         Customer customer = reminder.getCustomer();
         JPanel result = new JPanel(new BorderLayout());
         result.add(new JLabel(customer.getFirstName() + ' ' + customer.getLastName()), BorderLayout.CENTER);
-        JLabel label = new JLabel("Send " + reminder.getPhase().getName() + " email");
+        PhaseState phaseState = reminder.getPhaseState();
+        Phase phase = context.getPhasesManager().getPhaseById(phaseState.getPhaseId());
+        JLabel label = new JLabel("Send " + phase.getName() + " email");
         if (reminder.getExpirationInDays() > 0) {
             label.setForeground(Color.RED);
             label.setToolTipText("Should have been done " + reminder.getExpirationInDays() + " days ago.");

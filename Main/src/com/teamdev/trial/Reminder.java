@@ -1,7 +1,7 @@
 package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
-import com.teamdev.trial.data.Phase;
+import com.teamdev.trial.data.PhaseState;
 
 /**
  * @author Vladimir Ikryanov
@@ -9,12 +9,12 @@ import com.teamdev.trial.data.Phase;
 public class Reminder {
 
     private final Customer customer;
-    private final Phase phase;
+    private final PhaseState phaseState;
     private final long expirationInDays;
 
-    protected Reminder(Customer customer, Phase phase, long expirationInDays) {
+    protected Reminder(Customer customer, PhaseState phaseState, long expirationInDays) {
         this.customer = customer;
-        this.phase = phase;
+        this.phaseState = phaseState;
         this.expirationInDays = expirationInDays;
     }
 
@@ -22,8 +22,8 @@ public class Reminder {
         return customer;
     }
 
-    public Phase getPhase() {
-        return phase;
+    public PhaseState getPhaseState() {
+        return phaseState;
     }
 
     public long getExpirationInDays() {

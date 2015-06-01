@@ -1,7 +1,9 @@
 package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
-import com.teamdev.trial.data.PipelineFactory;
+import com.teamdev.trial.data.Pipeline;
+import com.teamdev.trial.data.PipelineState;
+import com.teamdev.trial.data.PipelineStateFactory;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -9,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.List;
 
 import static java.awt.GridBagConstraints.*;
 
@@ -17,14 +20,17 @@ import static java.awt.GridBagConstraints.*;
  */
 public class CustomerDialog extends JDialog {
 
+    private final ApplicationContext context;
     private Customer customer;
     private JTextField firstNameTextField;
     private JTextField lastNameTextField;
     private JTextField emailTextField;
     private JDateChooser registrationDateChooser;
+    private JComboBox pipelineComboBox;
 
     public CustomerDialog(Frame parent, ApplicationContext context) {
         super(parent, "New Customer", true);
+        this.context = context;
         setContentPane(createContentPane());
     }
 
@@ -33,6 +39,8 @@ public class CustomerDialog extends JDialog {
         lastNameTextField = new JTextField();
         emailTextField = new JTextField();
         registrationDateChooser = new JDateChooser(new Date());
+        List<Pipeline> pipelines = context.getPipelinesManager().getPipelines();
+        pipelineComboBox = new JComboBox(pipelines.toArray());
 
         JPanel contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -56,11 +64,16 @@ public class CustomerDialog extends JDialog {
         contentPane.add(registrationDateChooser, new GridBagConstraints(
                 0, 7, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
+        contentPane.add(new JLabel("Pipeline:"), new GridBagConstraints(
+                0, 8, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
+        contentPane.add(pipelineComboBox, new GridBagConstraints(
+                0, 9, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+
         contentPane.add(Box.createVerticalGlue(), new GridBagConstraints(
-                0, 8, 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
+                0, 10, 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
         contentPane.add(createActionPane(), new GridBagConstraints(
-                0, 9, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+                0, 11, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
         return contentPane;
     }
 
@@ -98,7 +111,10 @@ public class CustomerDialog extends JDialog {
                     customer.setLastName(lastName);
                     customer.setEmail(email);
                     customer.setState(Customer.State.UNKNOWN);
-                    customer.setPipeline(PipelineFactory.create30DaysEvaluation(date));
+
+                    Pipeline pipeline = (Pipeline) pipelineComboBox.getSelectedItem();
+                    PipelineState pipelineState = PipelineStateFactory.create(date, pipeline);
+                    customer.setPipelineState(pipelineState);
                     dispose();
                 }
             }

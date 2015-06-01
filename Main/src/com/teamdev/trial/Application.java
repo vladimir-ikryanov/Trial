@@ -8,12 +8,8 @@ import javax.swing.*;
 public class Application {
     public static void main(String[] args) {
         ApplicationSettings settings = new ApplicationSettings();
-        final ApplicationContext context = new ApplicationContext(settings);
-        try {
-            context.load();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load app context.", e);
-        }
+        ApplicationContext context = new ApplicationContext(settings);
+        context.load();
 
         ApplicationFrame frame = new ApplicationFrame(context);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
