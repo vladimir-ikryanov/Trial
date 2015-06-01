@@ -51,7 +51,12 @@ public class FinishReminderPane extends JPanel {
         Customer customer = reminder.getCustomer();
         JPanel result = new JPanel(new BorderLayout());
         result.add(new JLabel(customer.getFirstName() + ' ' + customer.getLastName()), BorderLayout.CENTER);
-        result.add(new JLabel("Make a decision"), BorderLayout.SOUTH);
+        JLabel label = new JLabel("Make a decision");
+        result.add(label, BorderLayout.SOUTH);
+        if (reminder.getExpirationInDays() > 0) {
+            label.setForeground(Color.RED);
+            label.setToolTipText("Should have been done " + reminder.getExpirationInDays() + " days ago.");
+        }
         return result;
     }
 }

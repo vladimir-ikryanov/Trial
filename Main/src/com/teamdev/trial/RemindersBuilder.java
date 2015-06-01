@@ -38,17 +38,18 @@ public class RemindersBuilder {
                             offsetInDays = phase.getOffsetInDays();
                         }
                         boolean reachedOffsetInDays = dateDiffInDays >= offsetInDays;
+                        long expirationInDays = dateDiffInDays - offsetInDays;
                         if (reachedOffsetInDays) {
                             EmailTemplatesManager emailTemplatesManager = context.getEmailTemplatesManager();
                             EmailTemplate emailTemplate = emailTemplatesManager.getEmailTemplateById(phase.getEmailTemplateId());
                             boolean hasEmailTemplate = emailTemplate != null;
                             if (hasEmailTemplate) {
-                                result.add(new EmailReminder(customer, phaseState, dateDiffInDays, emailTemplate));
+                                result.add(new EmailReminder(customer, phaseState, expirationInDays, emailTemplate));
                             }
 
                             boolean isFinishPhase = i == phaseStates.size() - 1;
                             if (isFinishPhase) {
-                                result.add(new FinishReminder(customer, phaseState, dateDiffInDays));
+                                result.add(new FinishReminder(customer, phaseState, expirationInDays));
                             }
                         }
                     }

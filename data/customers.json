@@ -2,237 +2,39 @@
   {
     "firstName": "John",
     "lastName": "Doe",
-    "email": "john.doe@gmail.com",
-    "pipeline": {
-      "name": "30-Days Evaluation",
-      "startDate": "May 31, 2015 12:54:08 AM",
-      "phases": [
-        {
-          "name": "Day",
-          "offsetInDays": 1,
-          "emailId": 0,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Week",
-          "offsetInDays": 7,
-          "emailId": 1,
-          "state": "OPENED"
-        },
-        {
-          "name": "Offer",
-          "offsetInDays": 20,
-          "emailId": 2,
-          "state": "OPENED"
-        },
-        {
-          "name": "Pre-Finish",
-          "offsetInDays": 29,
-          "emailId": 3,
-          "state": "OPENED"
-        },
-        {
-          "name": "Feedback",
-          "offsetInDays": 30,
-          "emailId": 4,
-          "state": "OPENED"
-        },
-        {
-          "name": "Finish",
-          "offsetInDays": 30,
-          "emailId": -1,
-          "state": "OPENED"
-        }
-      ]
-    },
-    "state": "WIN"
-  },
-  {
-    "firstName": "First",
-    "lastName": "Last",
     "email": "a@gmail.com",
-    "pipeline": {
-      "name": "30-Days Evaluation",
-      "startDate": "May 19, 2015 11:21:08 AM",
-      "phases": [
+    "pipelineState": {
+      "pipelineId": 0,
+      "startDate": "May 1, 2015 2:00:35 PM",
+      "phaseStates": [
         {
-          "name": "Day",
-          "offsetInDays": 1,
-          "emailId": 0,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Week",
-          "offsetInDays": 7,
-          "emailId": 1,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Offer",
-          "offsetInDays": 20,
-          "emailId": 2,
-          "state": "OPENED"
-        },
-        {
-          "name": "Pre-Finish",
-          "offsetInDays": 29,
-          "emailId": 3,
-          "state": "OPENED"
-        },
-        {
-          "name": "Feedback",
-          "offsetInDays": 30,
-          "emailId": 4,
-          "state": "OPENED"
-        },
-        {
-          "name": "Finish",
-          "offsetInDays": 30,
-          "emailId": -1,
-          "state": "OPENED"
-        }
-      ]
-    },
-    "state": "WIN"
-  },
-  {
-    "firstName": "a",
-    "lastName": "a",
-    "email": "a",
-    "pipeline": {
-      "name": "30-Days Evaluation",
-      "startDate": "Apr 1, 2015 12:00:00 AM",
-      "phases": [
-        {
-          "name": "Day",
-          "offsetInDays": 1,
-          "emailId": 0,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Week",
-          "offsetInDays": 7,
-          "emailId": 1,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Offer",
-          "offsetInDays": 20,
-          "emailId": 2,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Pre-Finish",
-          "offsetInDays": 29,
-          "emailId": 3,
+          "phaseId": 0,
+          "customOffsetInDays": 0,
           "state": "CANCELED"
         },
         {
-          "name": "Feedback",
-          "offsetInDays": 30,
-          "emailId": 4,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Finish",
-          "offsetInDays": 30,
-          "emailId": -1,
-          "state": "CLOSED"
-        }
-      ]
-    },
-    "state": "WIN"
-  },
-  {
-    "firstName": "Vladimir",
-    "lastName": "Ikryanov",
-    "email": "vladimir.ikryanov@gmail.com",
-    "pipeline": {
-      "name": "30-Days Evaluation",
-      "startDate": "May 1, 2015 12:30:08 PM",
-      "phases": [
-        {
-          "name": "Day",
-          "offsetInDays": 1,
-          "emailId": 0,
-          "state": "CLOSED"
-        },
-        {
-          "name": "Week",
-          "offsetInDays": 7,
-          "emailId": 1,
+          "phaseId": 1,
+          "customOffsetInDays": 0,
           "state": "CANCELED"
         },
         {
-          "name": "Offer",
-          "offsetInDays": 20,
-          "emailId": 2,
+          "phaseId": 2,
+          "customOffsetInDays": 0,
           "state": "CANCELED"
         },
         {
-          "name": "Pre-Finish",
-          "offsetInDays": 29,
-          "emailId": 3,
+          "phaseId": 3,
+          "customOffsetInDays": 0,
+          "state": "CLOSED"
+        },
+        {
+          "phaseId": 4,
+          "customOffsetInDays": 0,
           "state": "CANCELED"
         },
         {
-          "name": "Feedback",
-          "offsetInDays": 30,
-          "emailId": 4,
-          "state": "OPENED"
-        },
-        {
-          "name": "Finish",
-          "offsetInDays": 30,
-          "emailId": -1,
-          "state": "OPENED"
-        }
-      ]
-    },
-    "state": "UNKNOWN"
-  },
-  {
-    "firstName": "a",
-    "lastName": "a",
-    "email": "a",
-    "pipeline": {
-      "name": "30-Days Evaluation",
-      "startDate": "Jun 1, 2015 12:46:42 PM",
-      "phases": [
-        {
-          "name": "Day",
-          "offsetInDays": 1,
-          "emailId": 0,
-          "state": "OPENED"
-        },
-        {
-          "name": "Week",
-          "offsetInDays": 7,
-          "emailId": 1,
-          "state": "OPENED"
-        },
-        {
-          "name": "Offer",
-          "offsetInDays": 20,
-          "emailId": 2,
-          "state": "OPENED"
-        },
-        {
-          "name": "Pre-Finish",
-          "offsetInDays": 29,
-          "emailId": 3,
-          "state": "OPENED"
-        },
-        {
-          "name": "Feedback",
-          "offsetInDays": 30,
-          "emailId": 4,
-          "state": "OPENED"
-        },
-        {
-          "name": "Finish",
-          "offsetInDays": 30,
-          "emailId": -1,
+          "phaseId": 5,
+          "customOffsetInDays": 0,
           "state": "OPENED"
         }
       ]
@@ -243,44 +45,218 @@
     "firstName": "b",
     "lastName": "b",
     "email": "b",
-    "pipeline": {
-      "name": "30-Days Evaluation",
-      "startDate": "May 31, 2015 12:46:53 PM",
-      "phases": [
+    "pipelineState": {
+      "pipelineId": 0,
+      "startDate": "Jun 1, 2015 2:03:18 PM",
+      "phaseStates": [
         {
-          "name": "Day",
-          "offsetInDays": 1,
-          "emailId": 0,
+          "phaseId": 0,
+          "customOffsetInDays": 0,
           "state": "OPENED"
         },
         {
-          "name": "Week",
-          "offsetInDays": 7,
-          "emailId": 1,
+          "phaseId": 1,
+          "customOffsetInDays": 0,
           "state": "OPENED"
         },
         {
-          "name": "Offer",
-          "offsetInDays": 20,
-          "emailId": 2,
+          "phaseId": 2,
+          "customOffsetInDays": 0,
           "state": "OPENED"
         },
         {
-          "name": "Pre-Finish",
-          "offsetInDays": 29,
-          "emailId": 3,
+          "phaseId": 3,
+          "customOffsetInDays": 0,
           "state": "OPENED"
         },
         {
-          "name": "Feedback",
-          "offsetInDays": 30,
-          "emailId": 4,
+          "phaseId": 4,
+          "customOffsetInDays": 0,
           "state": "OPENED"
         },
         {
-          "name": "Finish",
-          "offsetInDays": 30,
-          "emailId": -1,
+          "phaseId": 5,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        }
+      ]
+    },
+    "state": "UNKNOWN"
+  },
+  {
+    "firstName": "e",
+    "lastName": "e",
+    "email": "e",
+    "pipelineState": {
+      "pipelineId": 1,
+      "startDate": "Jun 1, 2015 2:18:11 PM",
+      "phaseStates": [
+        {
+          "phaseId": 6,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 7,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 8,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        }
+      ]
+    },
+    "state": "UNKNOWN"
+  },
+  {
+    "firstName": "e1",
+    "lastName": "e1",
+    "email": "e1",
+    "pipelineState": {
+      "pipelineId": 1,
+      "startDate": "Apr 1, 2015 2:19:38 PM",
+      "phaseStates": [
+        {
+          "phaseId": 6,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 7,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 8,
+          "customOffsetInDays": 0,
+          "state": "CLOSED"
+        }
+      ]
+    },
+    "state": "WIN"
+  },
+  {
+    "firstName": "a",
+    "lastName": "",
+    "email": "a",
+    "pipelineState": {
+      "pipelineId": 0,
+      "startDate": "Jun 1, 2015 3:02:17 PM",
+      "phaseStates": [
+        {
+          "phaseId": 0,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 1,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 2,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 3,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 4,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 5,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        }
+      ]
+    },
+    "state": "UNKNOWN"
+  },
+  {
+    "firstName": "a",
+    "lastName": "a",
+    "email": "a",
+    "pipelineState": {
+      "pipelineId": 0,
+      "startDate": "May 24, 2015 3:06:32 PM",
+      "phaseStates": [
+        {
+          "phaseId": 0,
+          "customOffsetInDays": 0,
+          "state": "CLOSED"
+        },
+        {
+          "phaseId": 1,
+          "customOffsetInDays": 0,
+          "state": "CLOSED"
+        },
+        {
+          "phaseId": 2,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 3,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 4,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 5,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        }
+      ]
+    },
+    "state": "UNKNOWN"
+  },
+  {
+    "firstName": "b",
+    "lastName": "b",
+    "email": "b",
+    "pipelineState": {
+      "pipelineId": 0,
+      "startDate": "May 12, 2015 3:07:03 PM",
+      "phaseStates": [
+        {
+          "phaseId": 0,
+          "customOffsetInDays": 0,
+          "state": "CLOSED"
+        },
+        {
+          "phaseId": 1,
+          "customOffsetInDays": 0,
+          "state": "CLOSED"
+        },
+        {
+          "phaseId": 2,
+          "customOffsetInDays": 0,
+          "state": "CANCELED"
+        },
+        {
+          "phaseId": 3,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 4,
+          "customOffsetInDays": 0,
+          "state": "OPENED"
+        },
+        {
+          "phaseId": 5,
+          "customOffsetInDays": 0,
           "state": "OPENED"
         }
       ]

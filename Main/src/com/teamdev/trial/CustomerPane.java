@@ -90,7 +90,13 @@ public class CustomerPane extends JPanel {
         List<PhaseState> phaseStates = pipelineState.getPhaseStates();
         for (PhaseState phaseState : phaseStates) {
             Phase phase = context.getPhasesManager().getPhaseById(phaseState.getPhaseId());
-            JLabel label = new JLabel(phase.getName() + ": " + phaseState.getState());
+            JLabel label = new JLabel(phase.getName());
+            if (phaseState.getState() == PhaseState.State.CLOSED) {
+                label.setForeground(Color.GREEN);
+            }
+            if (phaseState.getState() == PhaseState.State.CANCELED) {
+                label.setForeground(Color.ORANGE);
+            }
             result.add(label);
         }
         return result;
