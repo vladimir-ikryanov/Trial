@@ -3,11 +3,9 @@ package com.teamdev.trial;
 import com.teamdev.trial.data.Customer;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 /**
  * @author Vladimir Ikryanov
@@ -19,11 +17,13 @@ public class ApplicationFrame extends JFrame {
     public ApplicationFrame(final ApplicationContext context) throws HeadlessException {
         this.context = context;
         setContentPane(createSplitPane());
+        setBackground(new Color(55, 55, 55));
         addWindowListener(new MyWindowAdapter(context));
     }
 
     private JSplitPane createSplitPane() {
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+        splitPane.setOpaque(false);
         splitPane.setResizeWeight(1.0);
         splitPane.setBorder(BorderFactory.createEmptyBorder());
         splitPane.setLeftComponent(createLeftPane());
@@ -41,8 +41,9 @@ public class ApplicationFrame extends JFrame {
 
     private Component createRightCaption() {
         JLabel result = new JLabel("Reminders");
-        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
         result.setFont(result.getFont().deriveFont(20.0f));
+        result.setForeground(Color.GRAY);
+        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
         return result;
     }
 
@@ -77,12 +78,28 @@ public class ApplicationFrame extends JFrame {
 
     private Component createLeftCaption() {
         JLabel label = new JLabel("Customers");
+        label.setForeground(Color.GRAY);
         label.setFont(label.getFont().deriveFont(20.0f));
 
         JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         result.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
         result.add(label);
-        JButton button = new JButton("New Customer");
+
+        final JButton button = new JButton("New Customer");
+        button.setBorderPainted(false);
+        button.setBorder(BorderFactory.createEmptyBorder(6, 15, 0, 0));
+        button.setForeground(Color.GRAY);
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+                button.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+                button.setForeground(Color.GRAY);
+            }
+        });
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

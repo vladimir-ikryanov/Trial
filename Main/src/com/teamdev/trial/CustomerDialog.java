@@ -47,12 +47,12 @@ public class CustomerDialog extends JDialog {
         contentPane.add(new JLabel("First Name:"), new GridBagConstraints(
                 0, 0, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
         contentPane.add(firstNameTextField, new GridBagConstraints(
-                0, 1, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 10, 0), 0, 0));
+                0, 1, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
         contentPane.add(new JLabel("Last Name:"), new GridBagConstraints(
                 0, 2, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
         contentPane.add(lastNameTextField, new GridBagConstraints(
-                0, 3, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 10, 0), 0, 0));
+                0, 3, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
         contentPane.add(new JLabel("Email:"), new GridBagConstraints(
                 0, 4, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));

@@ -52,8 +52,9 @@ public class RemindersPane extends JPanel {
         List<Reminder> reminders = remindersBuilder.getRemindersForToday();
         if (reminders.isEmpty()) {
             JLabel label = new JLabel("No Tasks for Today");
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setHorizontalTextPosition(SwingConstants.CENTER);
+            label.setForeground(Color.GRAY);
+            label.setVerticalAlignment(SwingConstants.TOP);
+            label.setVerticalTextPosition(SwingConstants.TOP);
             remindersPane.add(label, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
         } else {
             for (int i = 0; i < reminders.size(); i++) {
