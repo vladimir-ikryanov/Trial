@@ -10,18 +10,24 @@ import java.util.List;
  */
 public class ApplicationContext {
 
+    private final ApplicationSettings settings;
     private final EmailTemplates emailTemplates;
     private final CustomersManager customersManager;
     private final JSONDataStorage<List<Customer>> customersDataStorage;
     private final JSONDataStorage<List<EmailTemplate>> emailTemplatesDataStorage;
 
     public ApplicationContext(ApplicationSettings settings) {
+        this.settings = settings;
         this.emailTemplates = new EmailTemplates();
         this.customersManager = new CustomersManager();
         this.customersDataStorage = new JSONDataStorage<List<Customer>>(settings.getCustomersFile(),
                 new TypeToken<List<Customer>>() {});
         this.emailTemplatesDataStorage = new JSONDataStorage<List<EmailTemplate>>(settings.getEmailTemplatesFile(),
                 new TypeToken<List<EmailTemplate>>() {});
+    }
+
+    public ApplicationSettings getSettings() {
+        return settings;
     }
 
     public CustomersManager getCustomersManager() {

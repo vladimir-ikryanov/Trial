@@ -14,4 +14,12 @@ public class ApplicationSettings {
     public File getCustomersFile() {
         return new File("data/customers.json");
     }
+
+    public String getFrom() {
+        return "vladimir.ikryanov@teamdev.com";
+    }
+
+    public String getCC() {
+        return "jxbrowser-evaluation@teamdev.com";
+    }
 }

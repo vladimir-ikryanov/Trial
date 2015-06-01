@@ -19,7 +19,7 @@ public class EmailReminderPane extends JPanel {
     private final EmailReminder reminder;
     private final ApplicationContext context;
 
-    public EmailReminderPane(ApplicationContext context, final EmailReminder reminder) {
+    public EmailReminderPane(final ApplicationContext context, final EmailReminder reminder) {
         this.context = context;
         this.reminder = reminder;
 
@@ -41,7 +41,10 @@ public class EmailReminderPane extends JPanel {
                     String subject = dialog.getSubject();
                     String body = dialog.getBody();
                     try {
-                        EmailService.send(to, "vladimir.ikryanov@teamdev.com", "jxbrowser-evaluation@teamdev.com", "password", subject, body);
+                        ApplicationSettings settings = context.getSettings();
+                        String from = settings.getFrom();
+                        String cc = settings.getCC();
+                        EmailService.send(to, from, cc, "password", subject, body);
                     } catch (MessagingException exception) {
                         throw new RuntimeException(exception);
                     }
