@@ -1,6 +1,6 @@
 package com.teamdev.trial;
 
-import com.teamdev.trial.data.*;
+import com.teamdev.trial.data.Customer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,10 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Date;
-import java.util.List;
-
-import static java.awt.GridBagConstraints.*;
 
 /**
  * @author Vladimir Ikryanov
@@ -23,16 +19,7 @@ public class ApplicationFrame extends JFrame {
     public ApplicationFrame(final ApplicationContext context) throws HeadlessException {
         this.context = context;
         setContentPane(createSplitPane());
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent windowEvent) {
-                try {
-                    context.save();
-                } catch (Exception e) {
-                    throw new RuntimeException("Failed to save app context.", e);
-                }
-            }
-        });
+        addWindowListener(new MyWindowAdapter(context));
     }
 
     private JSplitPane createSplitPane() {
@@ -52,7 +39,7 @@ public class ApplicationFrame extends JFrame {
         return result;
     }
 
-    private JLabel createRightCaption() {
+    private Component createRightCaption() {
         JLabel result = new JLabel("Reminders");
         result.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
         result.setFont(result.getFont().deriveFont(20.0f));
@@ -67,16 +54,7 @@ public class ApplicationFrame extends JFrame {
     }
 
     private Component createRemindersPane() {
-        JPanel contentPane = new JPanel();
-        contentPane.setLayout(new GridBagLayout());
-        for (int i = 0; i < 50; i++) {
-            contentPane.add(new ReminderPane(), new GridBagConstraints(0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-        }
-        contentPane.add(Box.createVerticalGlue(), new GridBagConstraints(0, 50, 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
-
-        JScrollPane result = new JScrollPane(contentPane);
-        result.setBorder(BorderFactory.createEmptyBorder());
-        return result;
+        return new RemindersPane(context);
     }
 
     private Component createLeftPane() {
@@ -108,7 +86,7 @@ public class ApplicationFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                NewCustomerDialog dialog = new NewCustomerDialog(ApplicationFrame.this, context);
+                CustomerDialog dialog = new CustomerDialog(ApplicationFrame.this, context);
                 dialog.pack();
                 dialog.setResizable(false);
                 dialog.setLocationRelativeTo(ApplicationFrame.this);
@@ -122,5 +100,32 @@ public class ApplicationFrame extends JFrame {
         });
         result.add(button);
         return result;
+    }
+
+    private static class MyWindowAdapter extends WindowAdapter {
+
+        private final ApplicationContext context;
+
+        private MyWindowAdapter(ApplicationContext context) {
+            this.context = context;
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            try {
+                context.save();
+            } catch (Exception exception) {
+                throw new RuntimeException("Failed to save app context.", exception);
+            }
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+            try {
+                context.save();
+            } catch (Exception exception) {
+                throw new RuntimeException("Failed to save app context.", exception);
+            }
+        }
     }
 }

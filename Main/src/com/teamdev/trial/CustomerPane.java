@@ -36,7 +36,8 @@ public class CustomerPane extends JPanel {
         Pipeline pipeline = customer.getPipeline();
         List<Phase> phases = pipeline.getPhases();
         for (Phase phase : phases) {
-            result.add(new JLabel(phase.getName() + ": " + phase.getState()));
+            JLabel label = new JLabel(phase.getName() + ": " + phase.getState());
+            result.add(label);
         }
         return result;
     }

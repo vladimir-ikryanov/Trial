@@ -45,7 +45,7 @@ public class Customer {
         return new ArrayList<CustomerListener>(listeners);
     }
 
-    private void fireOnCustomerChanged() {
+    public void fireOnCustomerChanged() {
         CustomerEvent event = new CustomerEvent(this);
         for (CustomerListener listener : getCustomerListeners()) {
             listener.onCustomerChanged(event);

@@ -2,6 +2,7 @@ package com.teamdev.trial.data;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Pipeline {
     public Pipeline(String name, List<Phase> phases, Date startDate) {
         this.name = name;
         this.phases = phases;
-        this.startDate = startDate;
+        this.startDate = new Date(startDate.getTime());
     }
 
     public String getName() {
@@ -31,10 +32,10 @@ public class Pipeline {
     }
 
     public Date getStartDate() {
-        return startDate;
+        return new Date(startDate.getTime());
     }
 
     public List<Phase> getPhases() {
-        return phases;
+        return new ArrayList<Phase>(phases);
     }
 }

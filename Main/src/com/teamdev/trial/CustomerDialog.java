@@ -15,7 +15,7 @@ import static java.awt.GridBagConstraints.*;
 /**
  * @author Vladimir Ikryanov
  */
-public class NewCustomerDialog extends JDialog {
+public class CustomerDialog extends JDialog {
 
     private Customer customer;
     private JTextField firstNameTextField;
@@ -23,7 +23,7 @@ public class NewCustomerDialog extends JDialog {
     private JTextField emailTextField;
     private JDateChooser registrationDateChooser;
 
-    public NewCustomerDialog(Frame parent, ApplicationContext context) {
+    public CustomerDialog(Frame parent, ApplicationContext context) {
         super(parent, "New Customer", true);
         setContentPane(createContentPane());
     }
@@ -111,7 +111,7 @@ public class NewCustomerDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        NewCustomerDialog dialog = new NewCustomerDialog(null, null);
+        CustomerDialog dialog = new CustomerDialog(null, null);
         dialog.setResizable(false);
         dialog.pack();
         dialog.setLocationRelativeTo(null);
