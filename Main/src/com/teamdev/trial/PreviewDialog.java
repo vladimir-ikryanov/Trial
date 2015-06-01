@@ -31,6 +31,7 @@ public class PreviewDialog extends JDialog {
 
         setTitle("Preview");
 
+        this.status = Status.CANCELED;
         this.customer = customer;
         this.template = template;
 
@@ -48,7 +49,6 @@ public class PreviewDialog extends JDialog {
     private Component createActionsPane() {
         JPanel result = new JPanel(new FlowLayout(FlowLayout.CENTER));
         result.add(createSendButton());
-        result.add(createCancelButton());
         return result;
     }
 
@@ -58,18 +58,6 @@ public class PreviewDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 status = Status.SENT;
-                dispose();
-            }
-        });
-        return button;
-    }
-
-    private JButton createCancelButton() {
-        JButton button = new JButton("Cancel");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                status = Status.CANCELED;
                 dispose();
             }
         });
