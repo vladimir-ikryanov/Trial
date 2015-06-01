@@ -36,8 +36,8 @@ public class RemindersBuilder {
                         if (reachedOffsetInDays) {
                             EmailTemplates emailTemplates = context.getEmailTemplates();
                             EmailTemplate emailTemplate = emailTemplates.getEmailTemplateById(phase.getEmailId());
-                            boolean isEmailPhase = emailTemplate != null;
-                            if (isEmailPhase) {
+                            boolean hasEmailTemplate = emailTemplate != null;
+                            if (hasEmailTemplate) {
                                 result.add(new EmailReminder(customer, phase, emailTemplate));
                             }
 

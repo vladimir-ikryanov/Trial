@@ -1,5 +1,4 @@
-{
-  "templates": [
+[
     {
       "id": 0,
       "subject": "Day Subject",
@@ -25,5 +24,4 @@
       "subject": "Feedback Subject",
       "body": "Hello {firstName}"
     }
-  ]
-}
+]

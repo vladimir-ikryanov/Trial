@@ -3,6 +3,7 @@ package com.teamdev.trial;
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.Phase;
 
+import javax.mail.MessagingException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,24 +14,40 @@ import static java.awt.GridBagConstraints.*;
 /**
  * @author Vladimir Ikryanov
  */
-public class ReminderPane extends JPanel {
+public class EmailReminderPane extends JPanel {
 
+    private final EmailReminder reminder;
     private final ApplicationContext context;
-    private final Reminder reminder;
 
-    public ReminderPane(ApplicationContext context, final Reminder reminder) {
+    public EmailReminderPane(ApplicationContext context, final EmailReminder reminder) {
         this.context = context;
         this.reminder = reminder;
 
         setLayout(new GridBagLayout());
         add(createInfoPane(), new GridBagConstraints(
                 0, 0, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-        JButton okButton = new JButton("OK");
+        JButton okButton = new JButton("Send");
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reminder.getPhase().setState(Phase.State.CLOSED);
-                reminder.getCustomer().fireOnCustomerChanged();
+                Window parent = SwingUtilities.getWindowAncestor(EmailReminderPane.this);
+                EmailPreviewDialog dialog = new EmailPreviewDialog(parent, reminder.getCustomer(), reminder.getEmailTemplate());
+                dialog.setSize(800, 600);
+                dialog.setLocationRelativeTo(parent);
+                dialog.setVisible(true);
+
+                if (dialog.getStatus() == EmailPreviewDialog.Status.SENT) {
+                    String to = reminder.getCustomer().getEmail();
+                    String subject = dialog.getSubject();
+                    String body = dialog.getBody();
+                    try {
+                        EmailService.send(to, "vladimir.ikryanov@teamdev.com", "jxbrowser-evaluation@teamdev.com", "password", subject, body);
+                    } catch (MessagingException exception) {
+                        throw new RuntimeException(exception);
+                    }
+                    reminder.getPhase().setState(Phase.State.CLOSED);
+                    reminder.getCustomer().setState(Customer.State.UNKNOWN);
+                }
             }
         });
         add(okButton, new GridBagConstraints(
@@ -40,7 +57,7 @@ public class ReminderPane extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 reminder.getPhase().setState(Phase.State.CANCELED);
-                reminder.getCustomer().fireOnCustomerChanged();
+                reminder.getCustomer().setState(Customer.State.UNKNOWN);
             }
         });
         add(cancelButton, new GridBagConstraints(

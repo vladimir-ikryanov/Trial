@@ -50,8 +50,11 @@ public class CustomersPane extends JPanel {
     private void updateCustomersPane(List<Customer> customers) {
         customersPane.removeAll();
         for (int i = 0; i < customers.size(); i++) {
-            customersPane.add(new CustomerPane(customers.get(i)), new GridBagConstraints(
-                    0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+            Customer customer = customers.get(i);
+            if (customer.getState() == Customer.State.UNKNOWN) {
+                customersPane.add(new CustomerPane(customer), new GridBagConstraints(
+                        0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+            }
         }
         customersPane.add(Box.createVerticalGlue(), new GridBagConstraints(
                 0, customers.size(), 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));

@@ -58,8 +58,12 @@ public class RemindersPane extends JPanel {
         } else {
             for (int i = 0; i < reminders.size(); i++) {
                 Reminder reminder = reminders.get(i);
-                ReminderPane reminderPane = new ReminderPane(context, reminder);
-                remindersPane.add(reminderPane, new GridBagConstraints(0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+                if (reminder instanceof FinishReminder) {
+                    remindersPane.add(new FinishReminderPane(context, (FinishReminder) reminder), new GridBagConstraints(0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+                }
+                if (reminder instanceof EmailReminder) {
+                    remindersPane.add(new EmailReminderPane(context, (EmailReminder) reminder), new GridBagConstraints(0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+                }
             }
             remindersPane.add(Box.createVerticalGlue(), new GridBagConstraints(0, reminders.size(), 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
         }

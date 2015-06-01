@@ -11,7 +11,6 @@ public class PipelineFactory {
 
     public static Pipeline create30DaysEvaluation(Date startDate) {
         List<Phase> phases = new ArrayList<Phase>();
-        phases.add(new Phase("Start", 0, -1, Phase.State.OPENED));
         phases.add(new Phase("Day", 1, 0, Phase.State.OPENED));
         phases.add(new Phase("Week", 7, 1, Phase.State.OPENED));
         phases.add(new Phase("Offer", 20, 2, Phase.State.OPENED));
