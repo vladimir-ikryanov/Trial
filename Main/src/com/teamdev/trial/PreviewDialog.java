@@ -88,9 +88,13 @@ public class PreviewDialog extends JDialog {
         ccLabel.setForeground(Color.GRAY);
 
         JTextField toTextField = new JTextField(customer.getEmail());
+        toTextField.setOpaque(false);
+        toTextField.setEditable(false);
         toTextField.setBorder(BorderFactory.createEmptyBorder());
 
         JTextField ccTextField = new JTextField("jxbrowser-evaluation@teamdev.com");
+        ccTextField.setOpaque(false);
+        ccTextField.setEditable(false);
         ccTextField.setBorder(BorderFactory.createEmptyBorder());
 
         JPanel result = new JPanel(new GridBagLayout());

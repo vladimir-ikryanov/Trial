@@ -3,11 +3,13 @@ package com.teamdev.trial;
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.Phase;
 import com.teamdev.trial.data.PhaseState;
+import com.teamdev.trial.ui.ButtonLabel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 
 import static java.awt.GridBagConstraints.*;
 
@@ -23,11 +25,30 @@ public class EmailReminderPane extends JPanel {
         this.context = context;
         this.reminder = reminder;
 
+        setOpaque(false);
         setLayout(new GridBagLayout());
+        setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
         add(createInfoPane(), new GridBagConstraints(
                 0, 0, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-        JButton okButton = new JButton("Send");
-        okButton.addActionListener(new ActionListener() {
+        add(createSendButton(), new GridBagConstraints(
+                1, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 10, 0, 5), 0, 0));
+        add(createCancelButton(), new GridBagConstraints(
+                2, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 5, 0, 10), 0, 0));
+    }
+
+    private Component createCancelButton() {
+        ButtonLabel result = new ButtonLabel("Cancel", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reminder.getPhaseState().setState(PhaseState.State.CANCELED);
+                reminder.getCustomer().setState(Customer.State.UNKNOWN);
+            }
+        });
+        return result;
+    }
+
+    private Component createSendButton() {
+        ButtonLabel result = new ButtonLabel("Send", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Window parent = SwingUtilities.getWindowAncestor(EmailReminderPane.this);
@@ -40,45 +61,42 @@ public class EmailReminderPane extends JPanel {
                     String to = reminder.getCustomer().getEmail();
                     String subject = dialog.getSubject();
                     String body = dialog.getBody();
-//                    try {
-//                        ApplicationSettings settings = context.getSettings();
-//                        String from = settings.getFrom();
-//                        String cc = settings.getCC();
-//                        EmailService.send(to, from, cc, "password", subject, body);
-//                    } catch (MessagingException exception) {
-//                        throw new RuntimeException(exception);
-//                    }
+                    //                    try {
+                    //                        ApplicationSettings settings = context.getSettings();
+                    //                        String from = settings.getFrom();
+                    //                        String cc = settings.getCC();
+                    //                        EmailService.send(to, from, cc, "password", subject, body);
+                    //                    } catch (MessagingException exception) {
+                    //                        throw new RuntimeException(exception);
+                    //                    }
                     reminder.getPhaseState().setState(PhaseState.State.CLOSED);
                     reminder.getCustomer().setState(Customer.State.UNKNOWN);
                 }
             }
         });
-        add(okButton, new GridBagConstraints(
-                1, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 0, 0, 0), 0, 0));
-        JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                reminder.getPhaseState().setState(PhaseState.State.CANCELED);
-                reminder.getCustomer().setState(Customer.State.UNKNOWN);
-            }
-        });
-        add(cancelButton, new GridBagConstraints(
-                2, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 0, 0, 0), 0, 0));
+        return result;
     }
 
     private Component createInfoPane() {
         Customer customer = reminder.getCustomer();
-        JPanel result = new JPanel(new BorderLayout());
-        result.add(new JLabel(customer.getFirstName() + ' ' + customer.getLastName()), BorderLayout.CENTER);
+
+        JLabel firstLastNameLabel = new JLabel(customer.getFirstName() + ' ' + customer.getLastName());
+        firstLastNameLabel.setForeground(Color.LIGHT_GRAY);
+
         PhaseState phaseState = reminder.getPhaseState();
         Phase phase = context.getPhasesManager().getPhaseById(phaseState.getPhaseId());
-        JLabel label = new JLabel("Send " + phase.getName() + " email");
+        JLabel taskLabel = new JLabel("Send " + phase.getName() + " email");
+        taskLabel.setForeground(Color.WHITE);
+        taskLabel.setFont(new Font("Segoe UI Light", Font.PLAIN, 18));
         if (reminder.getExpirationInDays() > 0) {
-            label.setForeground(Color.RED);
-            label.setToolTipText("Should have been done " + reminder.getExpirationInDays() + " days ago.");
+            taskLabel.setForeground(new Color(255, 100, 100));
+            taskLabel.setToolTipText("Should have been done " + reminder.getExpirationInDays() + " days ago.");
         }
-        result.add(label, BorderLayout.SOUTH);
+
+        JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
+        result.add(taskLabel, BorderLayout.CENTER);
+        result.add(firstLastNameLabel, BorderLayout.SOUTH);
         return result;
     }
 }

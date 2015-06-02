@@ -58,6 +58,7 @@ public class RemindersPane extends JPanel {
         if (reminders.isEmpty()) {
             JLabel label = new JLabel("No Tasks for Today");
             label.setForeground(Color.GRAY);
+            label.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             label.setVerticalAlignment(SwingConstants.TOP);
             label.setVerticalTextPosition(SwingConstants.TOP);
             remindersPane.add(label, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));

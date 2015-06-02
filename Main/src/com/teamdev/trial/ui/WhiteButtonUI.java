@@ -9,9 +9,6 @@ import java.awt.*;
  */
 public class WhiteButtonUI extends MetalButtonUI {
 
-    public WhiteButtonUI() {
-    }
-
     @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);

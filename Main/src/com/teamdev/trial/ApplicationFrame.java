@@ -1,13 +1,14 @@
 package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
+import com.teamdev.trial.ui.ButtonLabel;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -93,24 +94,9 @@ public class ApplicationFrame extends JFrame {
         label.setForeground(Color.GRAY);
         label.setFont(new Font("Segoe UI Light", Font.PLAIN, 36));
 
-        final JLabel buttonLabel = new JLabel("New Customer");
-        buttonLabel.setForeground(Color.GRAY);
-        buttonLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        buttonLabel.setBorder(BorderFactory.createEmptyBorder(19, 10, 0, 0));
-
-        buttonLabel.addMouseListener(new MouseAdapter() {
+        final ButtonLabel buttonLabel = new ButtonLabel("New Customer", new ActionListener() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                buttonLabel.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                buttonLabel.setForeground(Color.GRAY);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 CustomerDialog dialog = new CustomerDialog(ApplicationFrame.this, context);
                 dialog.pack();
                 dialog.setResizable(false);
@@ -123,6 +109,7 @@ public class ApplicationFrame extends JFrame {
                 }
             }
         });
+        buttonLabel.setBorder(BorderFactory.createEmptyBorder(19, 10, 0, 0));
 
         JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         result.setOpaque(false);
