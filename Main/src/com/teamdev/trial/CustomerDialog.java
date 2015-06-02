@@ -32,6 +32,7 @@ public class CustomerDialog extends JDialog {
         super(parent, "New Customer", true);
         this.context = context;
         setContentPane(createContentPane());
+        setSize(300, 300);
     }
 
     private JPanel createContentPane() {
@@ -41,31 +42,32 @@ public class CustomerDialog extends JDialog {
         registrationDateChooser = new JDateChooser(new Date());
         List<Pipeline> pipelines = context.getPipelinesManager().getPipelines();
         pipelineComboBox = new JComboBox(pipelines.toArray());
+        pipelineComboBox.setOpaque(false);
 
         JPanel contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         contentPane.add(new JLabel("First Name:"), new GridBagConstraints(
-                0, 0, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
+                0, 0, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
         contentPane.add(firstNameTextField, new GridBagConstraints(
                 0, 1, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
         contentPane.add(new JLabel("Last Name:"), new GridBagConstraints(
-                0, 2, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
+                0, 2, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(5, 0, 0, 0), 0, 0));
         contentPane.add(lastNameTextField, new GridBagConstraints(
                 0, 3, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
         contentPane.add(new JLabel("Email:"), new GridBagConstraints(
-                0, 4, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
+                0, 4, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(5, 0, 0, 0), 0, 0));
         contentPane.add(emailTextField, new GridBagConstraints(
-                0, 5, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 10, 0), 0, 0));
+                0, 5, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
         contentPane.add(new JLabel("Registration Date:"), new GridBagConstraints(
-                0, 6, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
+                0, 6, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(5, 0, 0, 0), 0, 0));
         contentPane.add(registrationDateChooser, new GridBagConstraints(
                 0, 7, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
         contentPane.add(new JLabel("Pipeline:"), new GridBagConstraints(
-                0, 8, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 5, 0, 0), 0, 0));
+                0, 8, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(5, 0, 0, 0), 0, 0));
         contentPane.add(pipelineComboBox, new GridBagConstraints(
                 0, 9, 1, 1, 1.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 

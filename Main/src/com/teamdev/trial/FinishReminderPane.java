@@ -2,6 +2,7 @@ package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.PhaseState;
+import com.teamdev.trial.ui.ButtonLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,47 +17,54 @@ import static java.awt.GridBagConstraints.*;
 public class FinishReminderPane extends JPanel {
 
     private final FinishReminder reminder;
-    private final ApplicationContext context;
 
-    public FinishReminderPane(ApplicationContext context, final FinishReminder reminder) {
-        this.context = context;
+    public FinishReminderPane(final FinishReminder reminder) {
         this.reminder = reminder;
 
-        setLayout(new GridBagLayout());
-        add(createInfoPane(), new GridBagConstraints(
-                0, 0, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-        JButton okButton = new JButton("Win");
-        okButton.addActionListener(new ActionListener() {
+        ButtonLabel okButton = new ButtonLabel("Win", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 reminder.getPhaseState().setState(PhaseState.State.CLOSED);
                 reminder.getCustomer().setState(Customer.State.WIN);
             }
         });
-        add(okButton, new GridBagConstraints(
-                1, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 0, 0, 0), 0, 0));
-        JButton cancelButton = new JButton("Loss");
-        cancelButton.addActionListener(new ActionListener() {
+
+        ButtonLabel cancelButton = new ButtonLabel("Loss", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 reminder.getPhaseState().setState(PhaseState.State.CANCELED);
                 reminder.getCustomer().setState(Customer.State.LOSS);
             }
         });
+
+        setOpaque(false);
+        setLayout(new GridBagLayout());
+        add(createInfoPane(), new GridBagConstraints(
+                0, 0, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+        add(okButton, new GridBagConstraints(
+                1, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 10, 0, 5), 0, 0));
         add(cancelButton, new GridBagConstraints(
-                2, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 0, 0, 0), 0, 0));
+                2, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 5, 0, 10), 0, 0));
     }
 
     private Component createInfoPane() {
         Customer customer = reminder.getCustomer();
-        JPanel result = new JPanel(new BorderLayout());
-        result.add(new JLabel(customer.getFirstName() + ' ' + customer.getLastName()), BorderLayout.CENTER);
-        JLabel label = new JLabel("Make a decision");
-        result.add(label, BorderLayout.SOUTH);
+
+        JLabel firstLastNameLabel = new JLabel(customer.getFirstName() + ' ' + customer.getLastName());
+        firstLastNameLabel.setForeground(Color.LIGHT_GRAY);
+
+        JLabel taskLabel = new JLabel("Make a decision");
+        taskLabel.setForeground(Color.WHITE);
+        taskLabel.setFont(new Font("Segoe UI Light", Font.PLAIN, 18));
         if (reminder.getExpirationInDays() > 0) {
-            label.setForeground(Color.RED);
-            label.setToolTipText("Should have been done " + reminder.getExpirationInDays() + " days ago.");
+            taskLabel.setForeground(new Color(255, 100, 100));
+            taskLabel.setToolTipText("Should have been done " + reminder.getExpirationInDays() + " days ago.");
         }
+
+        JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
+        result.add(taskLabel, BorderLayout.CENTER);
+        result.add(firstLastNameLabel, BorderLayout.SOUTH);
         return result;
     }
 }

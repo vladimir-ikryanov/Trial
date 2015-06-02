@@ -80,7 +80,7 @@ public class ApplicationFrame extends JFrame {
     private Component createLeftContent() {
         JPanel result = new JPanel(new BorderLayout());
         result.setOpaque(false);
-        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 0));
         result.add(createCustomersPane(), BorderLayout.CENTER);
         return result;
     }
@@ -98,7 +98,6 @@ public class ApplicationFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CustomerDialog dialog = new CustomerDialog(ApplicationFrame.this, context);
-                dialog.pack();
                 dialog.setResizable(false);
                 dialog.setLocationRelativeTo(ApplicationFrame.this);
                 dialog.setVisible(true);

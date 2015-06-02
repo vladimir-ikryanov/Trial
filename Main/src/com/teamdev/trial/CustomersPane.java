@@ -8,9 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-import static java.awt.GridBagConstraints.BOTH;
-import static java.awt.GridBagConstraints.HORIZONTAL;
-import static java.awt.GridBagConstraints.NORTH;
+import static java.awt.GridBagConstraints.*;
 
 /**
  * @author Vladimir Ikryanov
@@ -56,12 +54,14 @@ public class CustomersPane extends JPanel {
         for (int i = 0; i < customers.size(); i++) {
             Customer customer = customers.get(i);
             if (customer.getState() == Customer.State.UNKNOWN) {
-                customersPane.add(new CustomerPane(context, customer), new GridBagConstraints(
-                        0, i, 1, 1, 0.0, 0.0, NORTH, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+                customersPane.add(new CustomerInfoPane(customer), new GridBagConstraints(
+                        0, i, 1, 1, 0.0, 0.0, WEST, BOTH, new Insets(0, 0, 10, 40), 0, 0));
+                customersPane.add(new CustomerPipelinePane(context, customer), new GridBagConstraints(
+                        1, i, 1, 1, 1.0, 0.0, WEST, BOTH, new Insets(0, 0, 10, 0), 0, 0));
             }
         }
         customersPane.add(Box.createVerticalGlue(), new GridBagConstraints(
-                0, customers.size(), 1, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
+                0, customers.size(), 2, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
         customersPane.validate();
         customersPane.repaint();
     }
