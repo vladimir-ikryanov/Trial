@@ -2,6 +2,7 @@ package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.EmailTemplate;
+import com.teamdev.trial.ui.WhiteButtonUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,12 +50,15 @@ public class PreviewDialog extends JDialog {
 
     private Component createActionsPane() {
         JPanel result = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        result.setOpaque(false);
+        result.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
         result.add(createSendButton());
         return result;
     }
 
     private JButton createSendButton() {
         JButton button = new JButton("Send");
+        button.setUI(new WhiteButtonUI());
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,7 +113,7 @@ public class PreviewDialog extends JDialog {
                 1, 3, 1, 1, 1.0, 0.0, EAST, HORIZONTAL, new Insets(10, 0, 0, 0), 0, 0));
 
         subjectTextField.setText(template.getSubject());
-        subjectTextField.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+        subjectTextField.setFont(new Font("Segoe UI", Font.PLAIN, 22));
         subjectTextField.setBorder(BorderFactory.createEmptyBorder());
 
         return result;
