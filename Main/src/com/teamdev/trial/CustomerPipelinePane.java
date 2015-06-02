@@ -3,15 +3,13 @@ package com.teamdev.trial;
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.PhaseState;
 import com.teamdev.trial.data.PipelineState;
-import com.teamdev.trial.ui.ButtonLabel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-import static java.awt.GridBagConstraints.*;
+import static java.awt.GridBagConstraints.BOTH;
+import static java.awt.GridBagConstraints.WEST;
 
 /**
  * @author Vladimir Ikryanov
@@ -31,55 +29,6 @@ public class CustomerPipelinePane extends JPanel {
                 1, 0, 1, 2, 1.0, 1.0, WEST, BOTH, new Insets(0, 0, 0, 0), 0, 0));
     }
 
-    private Component createWinLossPane() {
-        JPanel result = new JPanel();
-        result.setOpaque(false);
-        result.add(createWinButton());
-        result.add(createLossButton());
-        result.add(createEditButton());
-        result.add(createRemoveButton());
-        return result;
-    }
-
-    private Component createEditButton() {
-        ButtonLabel button = new ButtonLabel("Edit", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        return button;
-    }
-
-    private Component createRemoveButton() {
-        ButtonLabel button = new ButtonLabel("Remove", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                context.getCustomersManager().removeCustomer(customer);
-            }
-        });
-        return button;
-    }
-
-    private Component createLossButton() {
-        ButtonLabel result = new ButtonLabel("Loss", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                customer.setState(Customer.State.LOSS);
-            }
-        });
-        return result;
-    }
-
-    private Component createWinButton() {
-        ButtonLabel result = new ButtonLabel("Win", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                customer.setState(Customer.State.WIN);
-            }
-        });
-        return result;
-    }
-
     private Component createPipelinePane() {
         JPanel result = new JPanel(new GridBagLayout());
         result.setOpaque(false);
@@ -95,10 +44,8 @@ public class CustomerPipelinePane extends JPanel {
             result.add(phasePane, new GridBagConstraints(j, 0, 1, 1, 0.0, 1.0, WEST, BOTH, new Insets(0, 0, 0, 0), 0, 0));
             result.add(phaseGluePane, new GridBagConstraints(j + 1, 0, 1, 1, 0.0, 1.0, WEST, BOTH, new Insets(0, 0, 0, 0), 0, 0));
         }
-        result.add(createWinLossPane(), new GridBagConstraints(
-                phaseStates.size() * 2, 0, 1, 1, 0.0, 0.0, WEST, HORIZONTAL, new Insets(0, 10, 0, 0), 0, 0));
         result.add(Box.createHorizontalBox(), new GridBagConstraints(
-                phaseStates.size() * 2 + 1, 0, 1, 1, 1.0, 1.0, WEST, BOTH, new Insets(0, 0, 0, 0), 0, 0));
+                phaseStates.size() * 2, 0, 1, 1, 1.0, 1.0, WEST, BOTH, new Insets(0, 0, 0, 0), 0, 0));
         return result;
     }
 }

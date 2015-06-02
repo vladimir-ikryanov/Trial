@@ -43,6 +43,7 @@ public class EmailReminderPane extends JPanel {
                 reminder.getCustomer().setState(Customer.State.UNKNOWN);
             }
         });
+        result.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         return result;
     }
 
@@ -73,6 +74,7 @@ public class EmailReminderPane extends JPanel {
                 }
             }
         });
+        result.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         return result;
     }
 

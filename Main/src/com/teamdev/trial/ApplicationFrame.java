@@ -108,6 +108,7 @@ public class ApplicationFrame extends JFrame {
                 }
             }
         });
+        buttonLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         buttonLabel.setBorder(BorderFactory.createEmptyBorder(19, 10, 0, 0));
 
         JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));

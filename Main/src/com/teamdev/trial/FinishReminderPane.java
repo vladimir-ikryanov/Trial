@@ -21,14 +21,17 @@ public class FinishReminderPane extends JPanel {
     public FinishReminderPane(final FinishReminder reminder) {
         this.reminder = reminder;
 
-        ButtonLabel okButton = new ButtonLabel("Win", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                reminder.getPhaseState().setState(PhaseState.State.CLOSED);
-                reminder.getCustomer().setState(Customer.State.WIN);
-            }
-        });
+        setOpaque(false);
+        setLayout(new GridBagLayout());
+        add(createInfoPane(), new GridBagConstraints(
+                0, 0, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+        add(createWinButton(), new GridBagConstraints(
+                1, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 10, 0, 5), 0, 0));
+        add(createLossButton(), new GridBagConstraints(
+                2, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 5, 0, 10), 0, 0));
+    }
 
+    private ButtonLabel createLossButton() {
         ButtonLabel cancelButton = new ButtonLabel("Loss", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -36,15 +39,20 @@ public class FinishReminderPane extends JPanel {
                 reminder.getCustomer().setState(Customer.State.LOSS);
             }
         });
+        cancelButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        return cancelButton;
+    }
 
-        setOpaque(false);
-        setLayout(new GridBagLayout());
-        add(createInfoPane(), new GridBagConstraints(
-                0, 0, 1, 1, 1.0, 0.0, WEST, HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-        add(okButton, new GridBagConstraints(
-                1, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 10, 0, 5), 0, 0));
-        add(cancelButton, new GridBagConstraints(
-                2, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 5, 0, 10), 0, 0));
+    private ButtonLabel createWinButton() {
+        ButtonLabel okButton = new ButtonLabel("Win", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reminder.getPhaseState().setState(PhaseState.State.CLOSED);
+                reminder.getCustomer().setState(Customer.State.WIN);
+            }
+        });
+        okButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        return okButton;
     }
 
     private Component createInfoPane() {

@@ -14,7 +14,6 @@ public class ButtonLabel extends JLabel {
 
     public ButtonLabel(String text, final ActionListener actionListener) {
         super(text);
-
         setForeground(Color.GRAY);
         setFont(new Font("Segoe UI", Font.PLAIN, 14));
         addMouseListener(new MouseAdapter() {
