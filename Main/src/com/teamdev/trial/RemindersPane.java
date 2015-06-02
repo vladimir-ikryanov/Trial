@@ -2,6 +2,7 @@ package com.teamdev.trial;
 
 import com.teamdev.trial.data.CustomersManagerEvent;
 import com.teamdev.trial.data.CustomersManagerListener;
+import com.teamdev.trial.ui.LightScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,10 +27,10 @@ public class RemindersPane extends JPanel {
         this.remindersBuilder = new RemindersBuilder(context);
         this.customersManagerListener = new DefaultCustomersManagerListener();
 
-        JScrollPane scrollPane = new JScrollPane(remindersPane);
+        LightScrollPane scrollPane = new LightScrollPane(remindersPane);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(50);
+        scrollPane.getScrollPane().getVerticalScrollBar().setUnitIncrement(50);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         setOpaque(false);

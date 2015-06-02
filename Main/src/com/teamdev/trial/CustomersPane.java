@@ -3,6 +3,7 @@ package com.teamdev.trial;
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.CustomersManagerEvent;
 import com.teamdev.trial.data.CustomersManagerListener;
+import com.teamdev.trial.ui.LightScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +26,10 @@ public class CustomersPane extends JPanel {
         this.customersPane = new JPanel(new GridBagLayout());
         this.customersPane.setOpaque(false);
 
-        JScrollPane scrollPane = new JScrollPane(customersPane);
+        LightScrollPane scrollPane = new LightScrollPane(customersPane);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
+        scrollPane.getScrollPane().getVerticalScrollBar().setUnitIncrement(50);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         setOpaque(false);
@@ -62,8 +64,8 @@ public class CustomersPane extends JPanel {
         }
         customersPane.add(Box.createVerticalGlue(), new GridBagConstraints(
                 0, customers.size(), 2, 1, 1.0, 1.0, NORTH, BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        customersPane.validate();
-        customersPane.repaint();
+        validate();
+        repaint();
     }
 
     private class DefaultCustomersManagerListener implements CustomersManagerListener {

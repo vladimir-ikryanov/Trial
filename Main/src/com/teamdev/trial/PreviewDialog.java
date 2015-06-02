@@ -2,6 +2,7 @@ package com.teamdev.trial;
 
 import com.teamdev.trial.data.Customer;
 import com.teamdev.trial.data.EmailTemplate;
+import com.teamdev.trial.ui.LightScrollPane;
 import com.teamdev.trial.ui.WhiteButtonUI;
 
 import javax.swing.*;
@@ -73,11 +74,15 @@ public class PreviewDialog extends JDialog {
         String updatedBody = template.getBody().replace("{firstName}", customer.getFirstName());
         bodyTextArea.setText(updatedBody);
         bodyTextArea.setLineWrap(true);
-        JScrollPane scrollPane = new JScrollPane(bodyTextArea);
+        LightScrollPane scrollPane = new LightScrollPane(bodyTextArea);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 35, 20, 35));
-        return scrollPane;
+
+        JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
+        result.add(scrollPane, BorderLayout.CENTER);
+        result.setBorder(BorderFactory.createEmptyBorder(0, 35, 20, 35));
+        return result;
     }
 
     private Component createCaptionPane() {

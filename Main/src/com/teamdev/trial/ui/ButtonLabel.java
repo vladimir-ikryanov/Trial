@@ -13,9 +13,14 @@ import java.awt.event.MouseEvent;
 public class ButtonLabel extends JLabel {
 
     public ButtonLabel(String text, final ActionListener actionListener) {
+        this(text, Color.GRAY, actionListener);
+    }
+
+    public ButtonLabel(String text, final Color foregroundColor, final ActionListener actionListener) {
         super(text);
         setForeground(Color.GRAY);
         setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        setForeground(foregroundColor);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -24,7 +29,7 @@ public class ButtonLabel extends JLabel {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                setForeground(Color.GRAY);
+                setForeground(foregroundColor);
             }
 
             @Override

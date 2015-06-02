@@ -86,24 +86,22 @@ public class CustomerInfoPane extends JPanel {
     }
 
     private Component createLossButton() {
-        ButtonLabel result = new ButtonLabel("Loss", new ActionListener() {
+        ButtonLabel result = new ButtonLabel("Loss", new Color(255, 100, 100), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 customer.setState(Customer.State.LOSS);
             }
         });
-        result.setForeground(new Color(255, 100, 100));
         return result;
     }
 
     private Component createWinButton() {
-        ButtonLabel result = new ButtonLabel("Win", new ActionListener() {
+        ButtonLabel result = new ButtonLabel("Win", new Color(0, 128, 64), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 customer.setState(Customer.State.WIN);
             }
         });
-        result.setForeground(new Color(0, 128, 64));
         return result;
     }
 }
