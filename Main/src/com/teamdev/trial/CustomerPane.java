@@ -24,7 +24,9 @@ public class CustomerPane extends JPanel {
     public CustomerPane(ApplicationContext context, Customer customer) {
         this.context = context;
         this.customer = customer;
+        setOpaque(false);
         setLayout(new GridBagLayout());
+        setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
         add(createCustomerPane(), new GridBagConstraints(
                 0, 0, 1, 1, 0.0, 0.0, WEST, NONE, new Insets(0, 0, 0, 0), 0, 0));
         add(createPipelinePane(), new GridBagConstraints(
@@ -77,9 +79,16 @@ public class CustomerPane extends JPanel {
     private Component createCustomerPane() {
         JPanel result = new JPanel(new BorderLayout());
         result.setOpaque(false);
-        result.setPreferredSize(new Dimension(150, 50));
-        result.add(new JLabel(customer.getFirstName() + " " + customer.getLastName()), BorderLayout.CENTER);
-        result.add(new JLabel(customer.getEmail()), BorderLayout.SOUTH);
+        result.setPreferredSize(new Dimension(250, 50));
+        JLabel firstLastNameLabel = new JLabel(customer.getFirstName() + ' ' + customer.getLastName());
+        firstLastNameLabel.setFont(new Font("Segoe UI Light", Font.PLAIN, 24));
+        firstLastNameLabel.setForeground(Color.LIGHT_GRAY);
+        result.add(firstLastNameLabel, BorderLayout.CENTER);
+
+        JLabel emailLabel = new JLabel(customer.getEmail());
+        emailLabel.setForeground(Color.GRAY);
+
+        result.add(emailLabel, BorderLayout.SOUTH);
         return result;
     }
 

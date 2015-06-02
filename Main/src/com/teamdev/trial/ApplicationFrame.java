@@ -3,9 +3,13 @@ package com.teamdev.trial;
 import com.teamdev.trial.data.Customer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * @author Vladimir Ikryanov
@@ -25,32 +29,38 @@ public class ApplicationFrame extends JFrame {
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         splitPane.setOpaque(false);
         splitPane.setResizeWeight(1.0);
+        splitPane.setContinuousLayout(true);
         splitPane.setBorder(BorderFactory.createEmptyBorder());
         splitPane.setLeftComponent(createLeftPane());
         splitPane.setRightComponent(createRightPane());
+        splitPane.setUI(new BasicSplitPaneUI() {
+            @Override
+            public BasicSplitPaneDivider createDefaultDivider() {
+                return new BasicSplitPaneDivider(this) {
+                    @Override
+                    public void paint(Graphics g) {
+                    }
+                };
+            }
+        });
         return splitPane;
     }
 
     private Component createRightPane() {
         JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
         result.setMinimumSize(new Dimension(350, 200));
         result.add(createRightCaption(), BorderLayout.NORTH);
-        result.add(createRightContent(), BorderLayout.CENTER);
+        result.add(createRemindersPane(), BorderLayout.CENTER);
         return result;
     }
 
     private Component createRightCaption() {
         JLabel result = new JLabel("Reminders");
-        result.setFont(result.getFont().deriveFont(20.0f));
+        result.setOpaque(false);
+        result.setFont(new Font("Segoe UI Light", Font.PLAIN, 36));
         result.setForeground(Color.GRAY);
-        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
-        return result;
-    }
-
-    private Component createRightContent() {
-        JPanel result = new JPanel(new BorderLayout());
-        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        result.add(createRemindersPane(), BorderLayout.CENTER);
+        result.setBorder(BorderFactory.createEmptyBorder(10, 20, 0, 0));
         return result;
     }
 
@@ -60,6 +70,7 @@ public class ApplicationFrame extends JFrame {
 
     private Component createLeftPane() {
         JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
         result.add(createLeftCaption(), BorderLayout.NORTH);
         result.add(createLeftContent(), BorderLayout.CENTER);
         return result;
@@ -67,6 +78,7 @@ public class ApplicationFrame extends JFrame {
 
     private Component createLeftContent() {
         JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
         result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         result.add(createCustomersPane(), BorderLayout.CENTER);
         return result;
@@ -79,30 +91,26 @@ public class ApplicationFrame extends JFrame {
     private Component createLeftCaption() {
         JLabel label = new JLabel("Customers");
         label.setForeground(Color.GRAY);
-        label.setFont(label.getFont().deriveFont(20.0f));
+        label.setFont(new Font("Segoe UI Light", Font.PLAIN, 36));
 
-        JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 0));
-        result.add(label);
+        final JLabel buttonLabel = new JLabel("New Customer");
+        buttonLabel.setForeground(Color.GRAY);
+        buttonLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        buttonLabel.setBorder(BorderFactory.createEmptyBorder(19, 10, 0, 0));
 
-        final JButton button = new JButton("New Customer");
-        button.setBorderPainted(false);
-        button.setBorder(BorderFactory.createEmptyBorder(6, 15, 0, 0));
-        button.setForeground(Color.GRAY);
-        button.addMouseListener(new MouseAdapter() {
+        buttonLabel.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-                button.setForeground(Color.WHITE);
+            public void mouseEntered(MouseEvent e) {
+                buttonLabel.setForeground(Color.WHITE);
             }
 
             @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-                button.setForeground(Color.GRAY);
+            public void mouseExited(MouseEvent e) {
+                buttonLabel.setForeground(Color.GRAY);
             }
-        });
-        button.addActionListener(new ActionListener() {
+
             @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void mouseReleased(MouseEvent e) {
                 CustomerDialog dialog = new CustomerDialog(ApplicationFrame.this, context);
                 dialog.pack();
                 dialog.setResizable(false);
@@ -115,7 +123,12 @@ public class ApplicationFrame extends JFrame {
                 }
             }
         });
-        result.add(button);
+
+        JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        result.setOpaque(false);
+        result.setBorder(BorderFactory.createEmptyBorder(10, 20, 0, 0));
+        result.add(label);
+        result.add(buttonLabel);
         return result;
     }
 

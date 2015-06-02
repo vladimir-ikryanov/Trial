@@ -22,15 +22,20 @@ public class RemindersPane extends JPanel {
     public RemindersPane(ApplicationContext context) {
         this.context = context;
         this.remindersPane = new JPanel(new GridBagLayout());
+        this.remindersPane.setOpaque(false);
         this.remindersBuilder = new RemindersBuilder(context);
         this.customersManagerListener = new DefaultCustomersManagerListener();
 
         JScrollPane scrollPane = new JScrollPane(remindersPane);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
         scrollPane.getVerticalScrollBar().setUnitIncrement(50);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
+        setOpaque(false);
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         initializeUI();
     }

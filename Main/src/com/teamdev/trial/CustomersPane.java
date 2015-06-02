@@ -25,10 +25,14 @@ public class CustomersPane extends JPanel {
         this.context = context;
         this.customersManagerListener = new DefaultCustomersManagerListener();
         this.customersPane = new JPanel(new GridBagLayout());
+        this.customersPane.setOpaque(false);
 
         JScrollPane scrollPane = new JScrollPane(customersPane);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
+        setOpaque(false);
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
 
