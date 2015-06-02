@@ -1,9 +1,6 @@
 package com.teamdev.trial;
 
-import com.teamdev.trial.data.Customer;
-import com.teamdev.trial.data.Pipeline;
-import com.teamdev.trial.data.PipelineState;
-import com.teamdev.trial.data.PipelineStateFactory;
+import com.teamdev.trial.data.*;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -22,27 +19,39 @@ public class CustomerDialog extends JDialog {
 
     private final ApplicationContext context;
     private Customer customer;
+
     private JTextField firstNameTextField;
     private JTextField lastNameTextField;
     private JTextField emailTextField;
     private JDateChooser registrationDateChooser;
     private JComboBox pipelineComboBox;
 
-    public CustomerDialog(Frame parent, ApplicationContext context) {
-        super(parent, "New Customer", true);
+    public CustomerDialog(Window parent, ApplicationContext context) {
+        this(parent, context, null);
+    }
+
+    public CustomerDialog(Window parent, ApplicationContext context, Customer customer) {
+        super(parent, customer != null ? "Edit Customer" : "New Customer", ModalityType.APPLICATION_MODAL);
         this.context = context;
+        this.customer = customer;
         setContentPane(createContentPane());
         setSize(300, 300);
+        setResizable(false);
+        setLocationRelativeTo(parent);
     }
 
     private JPanel createContentPane() {
-        firstNameTextField = new JTextField();
-        lastNameTextField = new JTextField();
-        emailTextField = new JTextField();
-        registrationDateChooser = new JDateChooser(new Date());
-        List<Pipeline> pipelines = context.getPipelinesManager().getPipelines();
+        firstNameTextField = new JTextField(customer != null ? customer.getFirstName() : "");
+        lastNameTextField = new JTextField(customer != null ? customer.getLastName() : "");
+        emailTextField = new JTextField(customer != null ? customer.getEmail() : "");
+        registrationDateChooser = new JDateChooser(customer != null ? customer.getPipelineState().getStartDate() : new Date());
+        PipelinesManager pipelinesManager = context.getPipelinesManager();
+        List<Pipeline> pipelines = pipelinesManager.getPipelines();
         pipelineComboBox = new JComboBox(pipelines.toArray());
         pipelineComboBox.setOpaque(false);
+        if (customer != null) {
+            pipelineComboBox.setSelectedItem(pipelinesManager.getPipelineById(customer.getPipelineState().getPipelineId()));
+        }
 
         JPanel contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -99,7 +108,7 @@ public class CustomerDialog extends JDialog {
     }
 
     private JButton createCreateButton() {
-        JButton result = new JButton("Create");
+        JButton result = new JButton(customer == null ? "Create" : "Save");
         result.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,11 +117,13 @@ public class CustomerDialog extends JDialog {
                 String email = emailTextField.getText();
                 Date date = registrationDateChooser.getDate();
                 if (!firstName.isEmpty() && !email.isEmpty()) {
-                    customer = new Customer();
+                    if (customer == null) {
+                        customer = new Customer();
+                        customer.setState(Customer.State.UNKNOWN);
+                    }
                     customer.setFirstName(firstName);
                     customer.setLastName(lastName);
                     customer.setEmail(email);
-                    customer.setState(Customer.State.UNKNOWN);
 
                     Pipeline pipeline = (Pipeline) pipelineComboBox.getSelectedItem();
                     PipelineState pipelineState = PipelineStateFactory.create(date, pipeline);

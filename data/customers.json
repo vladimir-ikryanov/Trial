@@ -116,7 +116,7 @@
     "email": "dmoneigh@gmail.com",
     "pipelineState": {
       "pipelineId": 0,
-      "startDate": "May 30, 2015 3:32:12 PM",
+      "startDate": "Jun 1, 2015 12:00:00 AM",
       "phaseStates": [
         {
           "phaseId": 0,
@@ -235,47 +235,5 @@
       ]
     },
     "state": "WIN"
-  },
-  {
-    "firstName": "b",
-    "lastName": "b",
-    "email": "b",
-    "pipelineState": {
-      "pipelineId": 0,
-      "startDate": "May 1, 2015 4:48:35 PM",
-      "phaseStates": [
-        {
-          "phaseId": 0,
-          "customOffsetInDays": 0,
-          "state": "OPENED"
-        },
-        {
-          "phaseId": 1,
-          "customOffsetInDays": 0,
-          "state": "OPENED"
-        },
-        {
-          "phaseId": 2,
-          "customOffsetInDays": 0,
-          "state": "OPENED"
-        },
-        {
-          "phaseId": 3,
-          "customOffsetInDays": 0,
-          "state": "OPENED"
-        },
-        {
-          "phaseId": 4,
-          "customOffsetInDays": 0,
-          "state": "OPENED"
-        },
-        {
-          "phaseId": 5,
-          "customOffsetInDays": 0,
-          "state": "OPENED"
-        }
-      ]
-    },
-    "state": "UNKNOWN"
   }
 ]

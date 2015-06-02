@@ -22,6 +22,7 @@ public class PhaseGluePane extends JPanel {
     @Override
     public void paint(Graphics g) {
         Graphics2D graphics2D = (Graphics2D) g;
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Color openedColor = new Color(40, 40, 40);
         Color closedColor = new Color(0, 128, 64);
         Color canceledColor = new Color(213, 106, 0);

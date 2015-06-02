@@ -1,37 +1,37 @@
 [
   {
     "id": 0,
-    "name": "Day",
+    "name": "1th day",
     "offsetInDays": 1,
     "emailTemplateId": 0
   },
   {
     "id": 1,
-    "name": "Week",
+    "name": "7th day",
     "offsetInDays": 7,
     "emailTemplateId": 1
   },
   {
     "id": 2,
-    "name": "Offer",
+    "name": "20th day",
     "offsetInDays": 20,
     "emailTemplateId": 2
   },
   {
     "id": 3,
-    "name": "Pre-Finish",
+    "name": "29th day",
     "offsetInDays": 29,
     "emailTemplateId": 3
   },
   {
     "id": 4,
-    "name": "Feedback",
+    "name": "30th day",
     "offsetInDays": 30,
     "emailTemplateId": 4
   },
   {
     "id": 5,
-    "name": "Finish",
+    "name": "37th day",
     "offsetInDays": 37,
     "emailTemplateId": -1
   },

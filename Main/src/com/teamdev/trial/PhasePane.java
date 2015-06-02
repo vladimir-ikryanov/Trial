@@ -17,17 +17,22 @@ public class PhasePane extends JPanel {
         Color closedColor = new Color(0, 128, 64);
         Color canceledColor = new Color(213, 106, 0);
         setBackground(openedColor);
+
+        JLabel label = new JLabel(phase.getName());
+        label.setForeground(Color.LIGHT_GRAY);
         if (phaseState.getState() == PhaseState.State.CLOSED) {
             setBackground(closedColor);
+            label.setForeground(Color.WHITE);
+            setToolTipText("Completed");
         }
         if (phaseState.getState() == PhaseState.State.CANCELED) {
             setBackground(canceledColor);
+            label.setForeground(Color.WHITE);
+            setToolTipText("Canceled");
         }
-        JLabel label = new JLabel(phase.getName());
-        label.setForeground(Color.WHITE);
-        label.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        label.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         setLayout(new BorderLayout());
         add(label, BorderLayout.CENTER);
-        setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
     }
 }

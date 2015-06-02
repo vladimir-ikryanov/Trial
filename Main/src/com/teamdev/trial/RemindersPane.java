@@ -35,7 +35,7 @@ public class RemindersPane extends JPanel {
         setOpaque(false);
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
-        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 20));
 
         initializeUI();
     }

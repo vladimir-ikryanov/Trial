@@ -55,9 +55,9 @@ public class CustomersPane extends JPanel {
             Customer customer = customers.get(i);
             if (customer.getState() == Customer.State.UNKNOWN) {
                 customersPane.add(new CustomerInfoPane(context, customer), new GridBagConstraints(
-                        0, i, 1, 1, 0.0, 0.0, WEST, BOTH, new Insets(0, 0, 10, 40), 0, 0));
+                        0, i, 1, 1, 0.0, 0.0, WEST, BOTH, new Insets(0, 0, 20, 40), 0, 0));
                 customersPane.add(new CustomerPipelinePane(context, customer), new GridBagConstraints(
-                        1, i, 1, 1, 1.0, 0.0, WEST, BOTH, new Insets(0, 0, 10, 0), 0, 0));
+                        1, i, 1, 1, 1.0, 0.0, WEST, BOTH, new Insets(0, 0, 20, 0), 0, 0));
             }
         }
         customersPane.add(Box.createVerticalGlue(), new GridBagConstraints(

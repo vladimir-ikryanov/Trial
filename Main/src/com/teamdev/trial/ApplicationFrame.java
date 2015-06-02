@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * @author Vladimir Ikryanov
@@ -21,6 +24,7 @@ public class ApplicationFrame extends JFrame {
 
     public ApplicationFrame(final ApplicationContext context) throws HeadlessException {
         this.context = context;
+        setTitle("Trial: Vladimir Ikryanov");
         setContentPane(createSplitPane());
         setBackground(new Color(55, 55, 55));
         addWindowListener(new MyWindowAdapter(context));
@@ -31,6 +35,7 @@ public class ApplicationFrame extends JFrame {
         splitPane.setOpaque(false);
         splitPane.setResizeWeight(1.0);
         splitPane.setContinuousLayout(true);
+        splitPane.setDividerSize(40);
         splitPane.setBorder(BorderFactory.createEmptyBorder());
         splitPane.setLeftComponent(createLeftPane());
         splitPane.setRightComponent(createRightPane());
@@ -57,11 +62,30 @@ public class ApplicationFrame extends JFrame {
     }
 
     private Component createRightCaption() {
-        JLabel result = new JLabel("Reminders");
+        JPanel result = new JPanel(new BorderLayout());
+        result.setOpaque(false);
+        result.add(createRemindersTitle(), BorderLayout.WEST);
+        result.add(createTodayDate(), BorderLayout.EAST);
+        return result;
+    }
+
+    private Component createTodayDate() {
+        DateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+        Calendar cal = Calendar.getInstance();
+        JLabel result = new JLabel(dateFormat.format(cal.getTime()));
+        result.setOpaque(false);
+        result.setFont(new Font("Segoe UI Light", Font.PLAIN, 16));
+        result.setForeground(Color.GRAY);
+        result.setBorder(BorderFactory.createEmptyBorder(27, 0, 0, 20));
+        return result;
+    }
+
+    private Component createRemindersTitle() {
+        JLabel result = new JLabel("Today's Tasks");
         result.setOpaque(false);
         result.setFont(new Font("Segoe UI Light", Font.PLAIN, 36));
         result.setForeground(Color.GRAY);
-        result.setBorder(BorderFactory.createEmptyBorder(10, 20, 0, 0));
+        result.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         return result;
     }
 
@@ -90,7 +114,7 @@ public class ApplicationFrame extends JFrame {
     }
 
     private Component createLeftCaption() {
-        JLabel label = new JLabel("Customers");
+        JLabel label = new JLabel("JxBrowser's Customers");
         label.setForeground(Color.GRAY);
         label.setFont(new Font("Segoe UI Light", Font.PLAIN, 36));
 
@@ -98,10 +122,7 @@ public class ApplicationFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CustomerDialog dialog = new CustomerDialog(ApplicationFrame.this, context);
-                dialog.setResizable(false);
-                dialog.setLocationRelativeTo(ApplicationFrame.this);
                 dialog.setVisible(true);
-
                 Customer customer = dialog.getCustomer();
                 if (customer != null) {
                     context.getCustomersManager().addCustomer(customer);
@@ -109,7 +130,7 @@ public class ApplicationFrame extends JFrame {
             }
         });
         buttonLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        buttonLabel.setBorder(BorderFactory.createEmptyBorder(19, 10, 0, 0));
+        buttonLabel.setBorder(BorderFactory.createEmptyBorder(19, 20, 0, 0));
 
         JPanel result = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         result.setOpaque(false);

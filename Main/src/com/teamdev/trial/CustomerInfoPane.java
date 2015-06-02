@@ -63,6 +63,13 @@ public class CustomerInfoPane extends JPanel {
         ButtonLabel button = new ButtonLabel("Edit", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Window window = SwingUtilities.getWindowAncestor(CustomerInfoPane.this);
+                CustomerDialog dialog = new CustomerDialog(window, context, customer);
+                dialog.setVisible(true);
+                Customer customer = dialog.getCustomer();
+                if (customer != null) {
+                    context.getCustomersManager().addCustomer(customer);
+                }
             }
         });
         return button;
@@ -85,6 +92,7 @@ public class CustomerInfoPane extends JPanel {
                 customer.setState(Customer.State.LOSS);
             }
         });
+        result.setForeground(new Color(255, 100, 100));
         return result;
     }
 
@@ -95,6 +103,7 @@ public class CustomerInfoPane extends JPanel {
                 customer.setState(Customer.State.WIN);
             }
         });
+        result.setForeground(new Color(0, 128, 64));
         return result;
     }
 }
