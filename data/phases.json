@@ -1,0 +1,56 @@
+[
+  {
+    "id": 0,
+    "name": "Day",
+    "offsetInDays": 1,
+    "emailTemplateId": 0
+  },
+  {
+    "id": 1,
+    "name": "Week",
+    "offsetInDays": 7,
+    "emailTemplateId": 1
+  },
+  {
+    "id": 2,
+    "name": "Offer",
+    "offsetInDays": 20,
+    "emailTemplateId": 2
+  },
+  {
+    "id": 3,
+    "name": "Pre-Finish",
+    "offsetInDays": 29,
+    "emailTemplateId": 3
+  },
+  {
+    "id": 4,
+    "name": "Feedback",
+    "offsetInDays": 30,
+    "emailTemplateId": 4
+  },
+  {
+    "id": 5,
+    "name": "Finish",
+    "offsetInDays": 37,
+    "emailTemplateId": -1
+  },
+  {
+    "id": 6,
+    "name": "Pre-Finish",
+    "offsetInDays": 29,
+    "emailTemplateId": 5
+  },
+  {
+    "id": 7,
+    "name": "Feedback",
+    "offsetInDays": 30,
+    "emailTemplateId": 6
+  },
+  {
+    "id": 8,
+    "name": "Finish",
+    "offsetInDays": 37,
+    "emailTemplateId": -1
+  }
+]
