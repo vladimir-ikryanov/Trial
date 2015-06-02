@@ -1,0 +1,63 @@
+<project name="Trial" basedir="." default="release">
+
+    <property name="product.version" value="1.0"/>
+
+    <property name="target" location="target"/>
+    <property name="target.lib" location="${target}/lib"/>
+    <property name="target.classes" location="${target}/classes"/>
+
+    <property name="project" value="jxbrowser-"/>
+    <property name="project.name" value="JxBrowser"/>
+    <property name="project.jar" value="trial-${product.version}.jar"/>
+
+    <property name="Main" location="Main"/>
+    <property name="Main.src" location="${Main}/src"/>
+    <property name="Main.lib" location="${Main}/lib"/>
+
+    <property name="src.level" value="1.6"/>
+
+    <path id="classpath">
+        <fileset dir="${target.lib}" includes="**/*.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="${target}"/>
+    </target>
+
+    <target name="prepare">
+        <mkdir dir="${target}"/>
+        <mkdir dir="${target.lib}"/>
+        <mkdir dir="${target.classes}"/>
+        <copy todir="${target.lib}">
+            <fileset file="lib/gson-2.2.4.jar"/>
+            <fileset file="lib/javax.mail-1.5.3.jar"/>
+            <fileset file="lib/jcalendar-1.4.jar"/>
+        </copy>
+    </target>
+
+    <target name="compile">
+        <javac includeantruntime="no" srcdir="${Main.src}" destdir="${target.classes}" classpathref="classpath"
+               source="${src.level}" target="${src.level}"/>
+    </target>
+
+    <target name="jar">
+        <jar destfile="${target.lib}/${project.jar}" level="9">
+            <fileset dir="${target.classes}" includes="**/**"/>
+            <manifest>
+                <attribute name="Created-By" value="TeamDev Ltd."/>
+                <attribute name="Implementation-Vendor" value="TeamDev Ltd."/>
+                <attribute name="Implementation-Title" value="${project.name}"/>
+                <attribute name="Implementation-Version" value="${product.version}"/>
+                <attribute name="Permissions" value="all-permissions"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="release">
+        <antcall target="clean"/>
+        <antcall target="prepare"/>
+        <antcall target="compile"/>
+        <antcall target="jar"/>
+    </target>
+
+</project>
