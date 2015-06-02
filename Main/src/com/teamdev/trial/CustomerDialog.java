@@ -4,11 +4,14 @@ import com.teamdev.trial.data.*;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import static java.awt.GridBagConstraints.*;
 
@@ -52,6 +55,8 @@ public class CustomerDialog extends JDialog {
         if (customer != null) {
             pipelineComboBox.setSelectedItem(pipelinesManager.getPipelineById(customer.getPipelineState().getPipelineId()));
         }
+
+        firstNameTextField.getDocument().addDocumentListener(new FirstNameDocumentListener());
 
         JPanel contentPane = new JPanel(new GridBagLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -140,12 +145,44 @@ public class CustomerDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        CustomerDialog dialog = new CustomerDialog(null, null);
+        CustomerDialog dialog = new CustomerDialog(null, new ApplicationContext(new ApplicationSettings()));
         dialog.setResizable(false);
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
 
         System.out.println("dialog.getCustomer() = " + dialog.getCustomer());
+    }
+
+    private class FirstNameDocumentListener implements DocumentListener {
+        @Override
+        public void insertUpdate(DocumentEvent documentEvent) {
+            processText(firstNameTextField.getText());
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent documentEvent) {
+            processText(firstNameTextField.getText());
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent documentEvent) {
+            processText(firstNameTextField.getText());
+        }
+
+        private void processText(final String text) {
+            if (text.contains(" ") && lastNameTextField.getText().isEmpty()) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        StringTokenizer tokenizer = new StringTokenizer(text, " ");
+                        firstNameTextField.setText(tokenizer.nextToken());
+                        if (tokenizer.hasMoreTokens()) {
+                            lastNameTextField.setText(tokenizer.nextToken());
+                        }
+                    }
+                });
+            }
+        }
     }
 }
