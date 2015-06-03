@@ -1,22 +1,22 @@
 [
   {
     "id": 0,
-    "subject": "Day Subject",
+    "subject": "Welcome to JxBrowser Evaluation!",
     "body": "Hello {firstName}"
   },
   {
     "id": 1,
-    "subject": "Week Subject",
+    "subject": "How is your JxBrowser trial going?",
     "body": "Hello {firstName}"
   },
   {
     "id": 2,
-    "subject": "Offer Subject",
+    "subject": "Your JxBrowser Trial is Ending Soon",
     "body": "Hello {firstName}"
   },
   {
     "id": 3,
-    "subject": "Pre-finish Subject",
+    "subject": "Your JxBrowser Trial is Almost Expired",
     "body": "Hello {firstName}"
   },
   {

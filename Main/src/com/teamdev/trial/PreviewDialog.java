@@ -23,7 +23,7 @@ public class PreviewDialog extends JDialog {
 
     private final Customer customer;
     private final EmailTemplate template;
-    private final JTextArea bodyTextArea;
+    private final JEditorPane bodyTextArea;
     private final JTextField subjectTextField;
 
     private Status status;
@@ -38,7 +38,8 @@ public class PreviewDialog extends JDialog {
         this.template = template;
 
         subjectTextField = new JTextField();
-        bodyTextArea = new JTextArea();
+        bodyTextArea = new JEditorPane();
+        bodyTextArea.setContentType("text/html");
         bodyTextArea.setFont(new Font("Arial", Font.PLAIN, 12));
 
         JPanel contentPane = new JPanel(new BorderLayout());
@@ -73,7 +74,6 @@ public class PreviewDialog extends JDialog {
     private Component createBodyPane() {
         String updatedBody = template.getBody().replace("{firstName}", customer.getFirstName());
         bodyTextArea.setText(updatedBody);
-        bodyTextArea.setLineWrap(true);
         LightScrollPane scrollPane = new LightScrollPane(bodyTextArea);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
@@ -149,11 +149,26 @@ public class PreviewDialog extends JDialog {
 
         EmailTemplate template = new EmailTemplate();
         template.setSubject("First Day of JxBrowser Evaluation");
-        template.setBody("Hell {firstName},\n\nThank you for contacting Support.");
+        template.setBody("<p>Hi {firstName},</p>" +
+                "<p>My name is Vladimir. I'm a developer in JxBrowser Team.</p>" +
+                "<p>I'm just checking in to make sure that configuring your project with JxBrowser library went smoothly.</p>" +
+                "<p>If you need any help getting started or in case of any questions related to usage of JxBrowser in your application, just let me know. I will be happy to help.</p>" +
+                "<p>I hope you will enjoy using JxBrowser!</p><p>All the best,</p><table cellpadding='0' border='0'>" +
+                "<tbody><tr><th><a href='https://plus.google.com/u/0/113918825515210809679/posts' style='text-decoration:none;'>" +
+                "<img alt='Vladimir Ikryanov' src='http://www.teamdev.com/img/evaluate-email/vladimir-ikryanov.jpg' width='60'/>" +
+                "</a></th><td width='10'>&nbsp;</td><td style='line-height:1.4;'>" +
+                "<a href='https://plus.google.com/u/0/113918825515210809679/posts' style='text-decoration:none;color:#000;'>" +
+                "<strong>Vladimir Ikryanov</strong><br>" +
+                "<span style='color:#82898B;'>JxBrowser Team</span><br>" +
+                "<span style='color:#82898B;'>TeamDev Ltd.</span>" +
+                "</a></td></tr></tbody></table>");
 
         PreviewDialog dialog = new PreviewDialog(null, customer, template);
         dialog.setSize(500, 300);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+
+        String body = dialog.getBody();
+        System.out.println("body = " + body);
     }
 }
