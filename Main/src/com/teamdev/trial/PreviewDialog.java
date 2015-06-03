@@ -150,10 +150,8 @@ public class PreviewDialog extends JDialog {
         EmailTemplate template = new EmailTemplate();
         template.setSubject("First Day of JxBrowser Evaluation");
         template.setBody("<p>Hi {firstName},</p>" +
-                "<p>My name is Vladimir. I'm a developer in JxBrowser Team.</p>" +
-                "<p>I'm just checking in to make sure that configuring your project with JxBrowser library went smoothly.</p>" +
-                "<p>If you need any help getting started or in case of any questions related to usage of JxBrowser in your application, just let me know. I will be happy to help.</p>" +
-                "<p>I hope you will enjoy using JxBrowser!</p><p>All the best,</p><table cellpadding='0' border='0'>" +
+                "<p>The evaluation license of your JxBrowser is expiring tomorrow, and I hope you had a chance to test the library’s functionality.</p>" +
+                "<p>In order to purchase the Development License please use the following <a href='https://secure.avangate.com/order/checkout.php?PRODS=1173723&QTY=1&CART=1&CARD=1&CLEAN_CART=ALL&_ga=1.69915216.1311684333.1432127743'>link</a>.<br>If another <a href='http://www.teamdev.com/jxbrowser#licensing-pricing'>type of licence</a> is required for your project, or in case you have licensing questions or need purchasing assistance, please e-mail me or our Sales team at <a href='mailto:sales@teamdev.com'>sales@teamdev.com</a>.</p><p>If you need more time to complete your evaluation, please let me know.</p><p>All the best,</p><table cellpadding='0' border='0'>" +
                 "<tbody><tr><th><a href='https://plus.google.com/u/0/113918825515210809679/posts' style='text-decoration:none;'>" +
                 "<img alt='Vladimir Ikryanov' src='http://www.teamdev.com/img/evaluate-email/vladimir-ikryanov.jpg' width='60'/>" +
                 "</a></th><td width='10'>&nbsp;</td><td style='line-height:1.4;'>" +
@@ -162,9 +160,10 @@ public class PreviewDialog extends JDialog {
                 "<span style='color:#82898B;'>JxBrowser Team</span><br>" +
                 "<span style='color:#82898B;'>TeamDev Ltd.</span>" +
                 "</a></td></tr></tbody></table>");
+        System.out.println(template.getBody());
 
         PreviewDialog dialog = new PreviewDialog(null, customer, template);
-        dialog.setSize(500, 300);
+        dialog.setSize(800, 600);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
 
