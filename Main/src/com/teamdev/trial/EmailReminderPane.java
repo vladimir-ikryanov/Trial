@@ -5,6 +5,7 @@ import com.teamdev.trial.data.Phase;
 import com.teamdev.trial.data.PhaseState;
 import com.teamdev.trial.ui.ButtonLabel;
 
+import javax.mail.MessagingException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -61,14 +62,14 @@ public class EmailReminderPane extends JPanel {
                     String to = reminder.getCustomer().getEmail();
                     String subject = dialog.getSubject();
                     String body = dialog.getBody();
-                    //                    try {
-                    //                        ApplicationSettings settings = context.getSettings();
-                    //                        String from = settings.getFrom();
-                    //                        String cc = settings.getCC();
-                    //                        EmailService.send(to, from, cc, "password", subject, body);
-                    //                    } catch (MessagingException exception) {
-                    //                        throw new RuntimeException(exception);
-                    //                    }
+                    try {
+                        ApplicationSettings settings = context.getSettings();
+                        String from = settings.getFrom();
+                        String cc = settings.getCC();
+                        EmailService.send(to, from, cc, "", subject, body);
+                    } catch (MessagingException exception) {
+                        throw new RuntimeException(exception);
+                    }
                     reminder.getPhaseState().setState(PhaseState.State.CLOSED);
                     reminder.getCustomer().setState(Customer.State.UNKNOWN);
                 }
